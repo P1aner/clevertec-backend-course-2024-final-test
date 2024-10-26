@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class EdinNewsDto {
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
     private String title;
     private String text;
 }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class FullCommentDto {
     private Long id;
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
     private String text;
     private String username;
 }

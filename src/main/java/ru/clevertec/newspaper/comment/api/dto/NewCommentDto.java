@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class NewCommentDto {
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
     private String text;
     private String username;
 }

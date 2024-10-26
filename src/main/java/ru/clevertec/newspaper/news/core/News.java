@@ -27,10 +27,10 @@ public class News {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
     private String title;
     private String text;
-    @OneToMany
+    @OneToMany(mappedBy = "news")
     private List<Comment> commentList;
 
 }

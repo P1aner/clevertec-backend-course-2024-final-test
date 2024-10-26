@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 public class FullNewsDto {
     private Long id;
-    private LocalDateTime dateTime;
+    private LocalDateTime localDateTime;
     private String title;
     private String text;
     private List<FullCommentDto> commentList;
