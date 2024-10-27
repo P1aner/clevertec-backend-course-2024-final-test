@@ -1,15 +1,18 @@
 spring:
+  profiles:
+      active:
+        - dev
   application:
     name: newspaper
   datasource:
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/newspaper
+    username: username
+    password: password
+    driver-class-name: driver-class-name
+    url: url
   jpa:
     hibernate:
       ddl-auto: validate
     generate-ddl: true
     show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: database-platform
 
