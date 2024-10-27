@@ -9,8 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NewsRepository extends JpaRepository<News, Long> {
     Page<News> findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(String title, String text, Pageable pageable);
-
-    Page<News> findAll(Pageable pageable);
-
-
 }

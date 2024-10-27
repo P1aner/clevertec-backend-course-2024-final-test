@@ -1,4 +1,10 @@
+logging:
+  level:
+    root: "info"
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
   h2:
     console:
       enabled: true

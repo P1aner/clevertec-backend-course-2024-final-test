@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.config;
+package ru.clevertec.newspaper.common.config;
 
 
 import io.swagger.v3.oas.models.OpenAPI;

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.clevertec.newspaper.common.exception.ResourceNotFoundException;
 import ru.clevertec.newspaper.news.api.dto.EdinNewsDto;
 import ru.clevertec.newspaper.news.api.dto.FullNewsDto;
 import ru.clevertec.newspaper.news.api.dto.NewNewsDto;
@@ -28,7 +29,7 @@ public class NewsService {
 
     public FullNewsDto updateNews(Long id, EdinNewsDto edinNewsDto) {
         News news = newsRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("News id: %s not found.", id)));
         newsMapper.updateNewsFromDto(edinNewsDto, news);
         News save = newsRepository.save(news);
         return newsMapper.toNewsDto(save);
@@ -36,7 +37,7 @@ public class NewsService {
 
     public FullNewsDto findNews(Long id) {
         News news = newsRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("News id: %s not found.", id)));
         return newsMapper.toNewsDto(news);
     }
 
@@ -47,7 +48,7 @@ public class NewsService {
 
     public void deleteNews(Long id) {
         if (!newsRepository.existsById(id)) {
-            throw new RuntimeException();
+            throw new ResourceNotFoundException(String.format("News id: %s not exist.", id));
         }
         newsRepository.deleteById(id);
     }

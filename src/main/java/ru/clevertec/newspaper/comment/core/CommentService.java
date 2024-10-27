@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.clevertec.newspaper.comment.api.dto.EditCommentDto;
 import ru.clevertec.newspaper.comment.api.dto.FullCommentDto;
 import ru.clevertec.newspaper.comment.api.dto.NewCommentDto;
+import ru.clevertec.newspaper.common.exception.ResourceNotFoundException;
 import ru.clevertec.newspaper.news.api.dto.FullNewsDto;
 import ru.clevertec.newspaper.news.core.News;
 import ru.clevertec.newspaper.news.core.NewsMapper;
@@ -25,14 +26,16 @@ public class CommentService {
 
     public FullCommentDto createComment(Long newsId, NewCommentDto newCommentDto) {
         Comment comment = commentMapper.toComment(newCommentDto);
-        News news = newsRepository.findById(newsId).orElseThrow(RuntimeException::new);
+        News news = newsRepository.findById(newsId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("News id: %s not found.", newsId)));
         comment.setNews(news);
         Comment save = commentRepository.save(comment);
         return commentMapper.toCommentDto(save);
     }
 
     public FullCommentDto updateComment(Long newsId, Long commentId, EditCommentDto editCommentDto) {
-        Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId).orElseThrow(RuntimeException::new);
+        Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Comment id: %s not found.", newsId)));
         commentMapper.updateCommentFromDto(editCommentDto, comment);
         Comment save = commentRepository.save(comment);
         return commentMapper.toCommentDto(save);
@@ -40,7 +43,7 @@ public class CommentService {
 
     public FullCommentDto findComment(Long newsId, Long commentId) {
         Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Comment id: %s not found.", newsId)));
         return commentMapper.toCommentDto(comment);
     }
 
@@ -49,7 +52,8 @@ public class CommentService {
     }
 
     public FullNewsDto getAllCommentOfNews(Long id, Pageable pageable) {
-        News news = newsRepository.findById(id).orElseThrow(RuntimeException::new);
+        News news = newsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("News id: %s not found.", id)));
         Page<Comment> byNewsId = commentRepository.findByNews_Id(id, pageable);
         List<Comment> content = byNewsId.getContent();
         news.setCommentList(content);
