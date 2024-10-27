@@ -2,8 +2,6 @@ package ru.clevertec.newspaper.comment.core;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.comment.api.CommentRestController;
 import ru.clevertec.newspaper.comment.api.dto.EditCommentDto;
@@ -21,47 +19,33 @@ public class CommentController implements CommentRestController {
 
 
     @Override
-    public ResponseEntity<FullNewsDto> getAllCommentByNews(Long newsId,
-                                                           Pageable pageable) {
-        FullNewsDto fullNewsDto = commentService.getAllCommentOfNews(newsId, pageable);
-        return new ResponseEntity<>(fullNewsDto, HttpStatus.OK);
+    public FullNewsDto getAllCommentByNews(Long newsId, Pageable pageable) {
+        return commentService.getAllCommentOfNews(newsId, pageable);
     }
 
     @Override
-    public ResponseEntity<List<FullCommentDto>> findComments(Long newsId,
-                                                             String q,
-                                                             Pageable pageable) {
-        List<FullCommentDto> findFullCommentDto = commentService.findComments(newsId, q, pageable);
-        return new ResponseEntity<>(findFullCommentDto, HttpStatus.OK);
+    public List<FullCommentDto> findComments(Long newsId, String q, Pageable pageable) {
+        return commentService.findComments(newsId, q, pageable);
     }
 
     @Override
-    public ResponseEntity<FullCommentDto> createComment(Long newsId,
-                                                        NewCommentDto newCommentDto) {
-        FullCommentDto comment = commentService.createComment(newsId, newCommentDto);
-        return new ResponseEntity<>(comment, HttpStatus.CREATED);
+    public FullCommentDto createComment(Long newsId, NewCommentDto newCommentDto) {
+        return commentService.createComment(newsId, newCommentDto);
     }
 
     @Override
-    public ResponseEntity<FullCommentDto> getComment(Long newsId,
-                                                     Long commentId) {
-        FullCommentDto comment = commentService.findComment(newsId, commentId);
-        return new ResponseEntity<>(comment, HttpStatus.OK);
+    public FullCommentDto getComment(Long newsId, Long commentId) {
+        return commentService.findComment(newsId, commentId);
     }
 
     @Override
-    public ResponseEntity<FullCommentDto> editComment(Long newsId,
-                                                      Long commentId,
-                                                      EditCommentDto editCommentDto) {
-        FullCommentDto commentUpdatedDto = commentService.updateComment(newsId, commentId, editCommentDto);
-        return new ResponseEntity<>(commentUpdatedDto, HttpStatus.OK);
+    public FullCommentDto editComment(Long newsId, Long commentId, EditCommentDto editCommentDto) {
+        return commentService.updateComment(newsId, commentId, editCommentDto);
     }
 
     @Override
-    public ResponseEntity<Object> deleteComment(Long newsId,
-                                                Long commentId) {
+    public void deleteComment(Long newsId, Long commentId) {
         commentService.deleteComment(newsId, commentId);
-        return ResponseEntity.noContent().build();
     }
 
 }
