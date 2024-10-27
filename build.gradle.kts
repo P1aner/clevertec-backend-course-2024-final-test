@@ -35,6 +35,7 @@ dependencies {
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApi")
     implementation("org.liquibase:liquibase-core")
+    implementation ("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
