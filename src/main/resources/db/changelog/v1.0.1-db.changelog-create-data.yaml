@@ -1,0 +1,3260 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: "Pavel Leshchanka"
+      changes:
+        - insert: #01
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Хоррор Slay the Princess перевели на русский язык, добавили тысячу иллюстраций, реплик и не только"
+              - column:
+                  name: title
+                  value: "Хоррор Slay the Princess перевели на русский язык"
+        - insert: #010
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@VladimirDatterrock"
+        - insert: #011
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@Dmitry_Lenper"
+        - insert: #012
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@nastolniyvadim"
+        - insert: #013
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@strimer_rus"
+        - insert: #014
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@ГлебЫЧ-ы4й"
+        - insert: #015
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@tsumi467"
+        - insert: #016
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@-VADIASIK-"
+        - insert: #017
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@tec1537"
+        - insert: #018
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@johnstorm9604"
+        - insert: #019
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "1"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@bestoftheworst28"
+        - insert:
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Маунт WoW за $90 не предел, китайцы заплатят Blizzard ещё больше, поскольку транспорт продают в комплекте с валютой"
+              - column:
+                  name: title
+                  value: "Маунт WoW за $90 не предел"
+        - insert: #020
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@jackdoe1312"
+        - insert: #021
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@user-les"
+        - insert: #022
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@AlexBykov"
+        - insert: #023
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@KittenYour"
+        - insert: #024
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ribkakarasyk"
+        - insert: #025
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@ISuvo"
+        - insert: #026
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Айдер_Нур"
+        - insert: #027
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@futoorist90"
+        - insert: #028
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@redhead_666"
+        - insert: #029
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "2"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@BokserPerm"
+
+        - insert: #03
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Euro Truck Simulator 2 получила реворк грузовика Volvo FH Series 4 и Германии, улучшения камеры. Стартовал открытый бета-тест обновления 1.53"
+              - column:
+                  name: title
+                  value: "Euro Truck Simulator 2 получила реворк"
+        - insert: #030
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@alextrofim9"
+        - insert: #031
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@konsol947"
+        - insert: #032
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@darthaus24"
+        - insert: #033
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@BAY_ARE"
+        - insert: #034
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@ВячеславХм"
+        - insert: #035
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Vadimema"
+        - insert: #036
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@fantazer5"
+        - insert: #037
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Kunimach"
+        - insert: #038
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@immortald"
+        - insert: #039
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "3"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Иван-ь"
+
+        - insert: #04
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Шутер Call of Duty Black Ops 6 получил поддержку облачного сервиса VK Play Cloud"
+              - column:
+                  name: title
+                  value: "Шутер Call of Duty Black Ops 6"
+        - insert: #040
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@mikebob"
+        - insert: #041
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@mitsubishidi"
+        - insert: #042
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@lubbertdas"
+        - insert: #043
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Clown1"
+        - insert: #044
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@psca"
+        - insert: #045
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Lord4Drag"
+        - insert: #046
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@grey654"
+        - insert: #047
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@meskmos"
+        - insert: #048
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@asunol"
+        - insert: #049
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "4"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@vovazat"
+
+        - insert: #05
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Вышел новый трейлер вампирской игры-песочницы Vampire Dynasty"
+              - column:
+                  name: title
+                  value: "Вышел новый трейлер"
+        - insert: #050
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Very_St"
+        - insert: #051
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Kot0w"
+        - insert: #052
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@airkid"
+        - insert: #053
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@rostles6"
+        - insert: #054
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@izi"
+        - insert: #055
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@izio"
+        - insert: #056
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ImyaFamil"
+        - insert: #057
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@алексан"
+        - insert: #058
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@alexbe"
+        - insert: #059
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "5"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ka-md"
+
+        - insert: #06
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Call of Duty Black Ops 6 стартовала в Steam со смешанных отзывов, некоторые не могут найти игру в меню и шутер часто вылетает"
+              - column:
+                  name: title
+                  value: "Call of Duty Black Ops 6"
+        - insert: #060
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Alex"
+        - insert: #061
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@martymcfly1"
+        - insert: #062
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IldarI"
+        - insert: #063
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@RusAqu"
+        - insert: #064
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@goodroma"
+        - insert: #065
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Savin"
+        - insert: #066
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Dokto"
+        - insert: #067
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@nyarlat"
+        - insert: #068
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@Расул"
+        - insert: #069
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "6"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@0374s"
+        - insert: #7
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Симулятор бокса Undisputed получает в основном отрицательные отзывы в Steam. Полная версия игры разочаровала геймеров"
+              - column:
+                  name: title
+                  value: "Симулятор бокса Undisputed"
+        - insert: #070
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@techno"
+        - insert: #071
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@xf"
+        - insert: #072
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@avro"
+        - insert: #073
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@ЕгорБ"
+        - insert: #074
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@an2qz"
+        - insert: #075
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@andrejmic"
+        - insert: #076
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@chem"
+        - insert: #077
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ex43x"
+        - insert: #078
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@MaacS"
+        - insert: #079
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "7"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@kabolo"
+
+        - insert: #08
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "GTA San Andreas исполнилось 20 лет. Фанатский мод SilentPatch получил крупнейшее обновление в честь юбилея"
+              - column:
+                  name: title
+                  value: "GTA San Andreas исполнилось 20 лет"
+        - insert: #080
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Sugardev"
+        - insert: #081
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@Ratt-P"
+        - insert: #082
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@deniskotov"
+        - insert: #083
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Alex_M"
+        - insert: #084
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@MrAle"
+        - insert: #085
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IceDragons"
+        - insert: #086
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@HarryAr"
+        - insert: #087
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Curuni"
+        - insert: #088
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@RavenO"
+        - insert: #089
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "8"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@CoOpo"
+
+        - insert: #09
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Анимационный сериал Tomb Raider: The Legend of Lara Croft получит второй сезон"
+              - column:
+                  name: title
+                  value: "Анимационный сериал Tomb Raider"
+        - insert: #090
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Happyworl"
+        - insert: #091
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@HAGL"
+        - insert: #092
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@aleksram"
+        - insert: #093
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ВасилийСтопу"
+        - insert: #094
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Ervin_van_"
+        - insert: #095
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@T_LuGaR"
+        - insert: #096
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@test4"
+        - insert: #097
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@p1qw"
+        - insert: #098
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@Lonely-x"
+        - insert: #099
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "9"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@user-go2"
+
+        - insert: #10
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "RTS Men of War 2 получила офлайн-режим спустя 5 месяцев после релиза, а также появились новые юниты"
+              - column:
+                  name: title
+                  value: "RTS Men of War 2"
+        - insert: #100
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@ИльдарСа"
+        - insert: #101
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@uncle.b"
+        - insert: #102
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@AtreiGam"
+        - insert: #103
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Vagab"
+        - insert: #104
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@Ruthless"
+        - insert: #105
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Kaw"
+        - insert: #106
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@tomorrowwil"
+        - insert: #107
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@alexeylilich"
+        - insert: #108
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@abystrov"
+        - insert: #109
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "10"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@real"
+
+        - insert: #11
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Зарянка из Honkai Star Rail получила официальные наушники. Новый коллаб с Moondrop"
+              - column:
+                  name: title
+                  value: "Зарянка из Honkai Star Rail"
+        - insert: #110
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@charles_"
+        - insert: #111
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@WTF-n"
+        - insert: #112
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@felanwulf"
+        - insert: #113
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Влади"
+        - insert: #114
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@TianK"
+        - insert: #115
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@11DRES"
+        - insert: #116
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Dmitry_"
+        - insert: #117
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@gg403"
+        - insert: #118
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@Bolx"
+        - insert: #119
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "11"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@Victo"
+        - insert: #12
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Симулятор могильщика + Carmageddon: анонсировали Sleep Well Cemetery, где оживших мертвецов придётся загонять назад в могилы"
+              - column:
+                  name: title
+                  value: "Симулятор могильщика"
+        - insert: #120
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Ануна"
+        - insert: #121
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@alexanderrad"
+        - insert: #122
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@yanak"
+        - insert: #123
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@unklev"
+        - insert: #124
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@EvaVa"
+        - insert: #125
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "v"
+              - column:
+                  name: username
+                  value: "@mneno"
+        - insert: #126
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@MrPy"
+        - insert: #127
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@sayona"
+        - insert: #128
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@faurtd"
+        - insert: #129
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "12"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@АнтонКа"
+
+        - insert: #13
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Инсайдер опроверг слухи: AMD не отменяла топовый Ryzen Z2 Extreme для портативных ПК"
+              - column:
+                  name: title
+                  value: "Инсайдер опроверг слухи"
+        - insert: #130
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Pach"
+        - insert: #131
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@omnisens"
+        - insert: #132
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #133
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #134
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #135
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #136
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #137
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #138
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #139
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "13"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+
+        - insert: #14
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Digital Foundry впечатлил апгрейд гонок F1 24 на PlayStation 5 Pro"
+              - column:
+                  name: title
+                  value: "Digital Foundry"
+        - insert: #140
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #141
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #142
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #143
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #144
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #145
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #146
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #147
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #148
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #149
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "14"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+
+        - insert: #15
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Valve анонсировала Фестиваль «Страхи в Steam 3». Скоро начнётся тематическая распродажа"
+              - column:
+                  name: title
+                  value: "Valve анонсировала Фестиваль"
+        - insert: #150
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #151
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #152
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #153
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #154
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #155
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #156
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #157
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #158
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #159
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "15"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+
+        - insert: #16
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Трассировка лучей: зло или благо? Детальное исследование Hardware Unboxed"
+              - column:
+                  name: title
+                  value: "Трассировка лучей"
+        - insert: #160
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #161
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #162
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #163
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #164
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #165
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #166
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #167
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #168
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #169
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "16"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #17
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "В Euro Truck Simulator 2 и ATS запустили хэллоуинский ивент с тыквами и наградами за доставки грузов"
+              - column:
+                  name: title
+                  value: "В Euro Truck Simulator 2 и AT"
+        - insert: #170
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #171
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #172
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #173
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #174
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #175
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #176
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #177
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #178
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #179
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "17"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+
+        - insert: #18
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "Аудитория Dead Island 2 превысила 10 миллионов человек"
+              - column:
+                  name: title
+                  value: "Аудитория Dead Island 2"
+        - insert: #180
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #181
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #182
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #183
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #184
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #185
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #186
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #187
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #188
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #189
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "18"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+
+        - insert: #19
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "В ремейке Silent Hill 2 исправили ошибку, запиравшую героя в Лабиринте, и добавили облачные сохранения Steam"
+              - column:
+                  name: title
+                  value: "В ремейке Silent Hill 2 исправили ошибку"
+        - insert: #190
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #191
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #192
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #193
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #194
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #195
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #196
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #197
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #198
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #199
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "19"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+
+        - insert: #20
+            tableName: news
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: text
+                  value: "В стиле EGS: магазин GOG получит эксклюзивный ремастер хита 1997 года"
+              - column:
+                  name: title
+                  value: "В стиле EGS"
+        - insert: #200
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #201
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #202
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #203
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"
+        - insert: #204
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Это тупо копипаст"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #205
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Топчики как всегда"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #206
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Вот так и надо сразу"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #207
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Обзор интересный"
+              - column:
+                  name: username
+                  value: "@IvanMurav"
+        - insert: #208
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Каму это надо?"
+              - column:
+                  name: username
+                  value: "@Joker_luc"
+        - insert: #209
+            tableName: comment
+            columns:
+              - column:
+                  name: local_date_time
+                  value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: news_id
+                  value: "20"
+              - column:
+                  name: text
+                  value: "Никамунинадо"
+              - column:
+                  name: username
+                  value: "@user-Roman_P"

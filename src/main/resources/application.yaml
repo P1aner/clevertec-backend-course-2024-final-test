@@ -8,7 +8,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/newspaper
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     generate-ddl: true
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect

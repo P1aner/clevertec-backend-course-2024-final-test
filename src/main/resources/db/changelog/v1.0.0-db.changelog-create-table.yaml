@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Pavel Leshchanka
+      changes:
+        - createTable:
+            tableName: news
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: local_date_time
+                  type: timestamp(6) without time zone
+              - column:
+                  name: text
+                  type: character varying(2048)
+              - column:
+                  name: title
+                  type: character varying(255)
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: local_date_time
+                  type: timestamp(6) without time zone
+              - column:
+                  name: news_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: character varying(255)
+              - column:
+                  name: username
+                  type: character varying(255)
+        - addForeignKeyConstraint:
+            baseTableName: comment
+            baseColumnNames: news_id
+            referencedTableName: news
+            referencedColumnNames: id
+            constraintName: fk_comment_news
+            onDelete: CASCADE
+            onUpdate: NO ACTION
