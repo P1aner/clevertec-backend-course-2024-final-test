@@ -30,8 +30,14 @@ repositories {
 
 dependencies {
 
+    implementation("org.zalando:problem-spring-web-starter:0.29.1")
+    implementation("org.zalando:jackson-datatype-problem:0.27.1")
+    implementation("org.zalando:problem:0.27.1")
+    implementation("org.zalando:problem-violations:0.29.1")
+
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApi")
     implementation("org.liquibase:liquibase-core")
