@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.comment.core;
+package ru.clevertec.newspaper.core.comment;
 
 
 import org.mapstruct.InjectionStrategy;
@@ -6,9 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import ru.clevertec.newspaper.comment.api.dto.EditCommentDto;
-import ru.clevertec.newspaper.comment.api.dto.FullCommentDto;
-import ru.clevertec.newspaper.comment.api.dto.NewCommentDto;
+import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
+import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
+import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ import java.util.List;
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CommentMapper {
 
-    FullCommentDto toCommentDto(Comment comment);
+    CommentDetailsDto toCommentDto(Comment comment);
 
     Comment toComment(NewCommentDto commentDto);
 
-    void updateCommentFromDto(EditCommentDto editCommentDto, @MappingTarget Comment comment);
+    void updateCommentFromDto(UpdateCommentDto updateCommentDto, @MappingTarget Comment comment);
 
-    List<FullCommentDto> toCommentListDto(List<Comment> all);
+    List<CommentDetailsDto> toCommentListDto(List<Comment> all);
 }

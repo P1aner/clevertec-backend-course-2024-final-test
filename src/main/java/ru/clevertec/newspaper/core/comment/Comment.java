@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.comment.core;
+package ru.clevertec.newspaper.core.comment;
 
 
 import jakarta.persistence.Column;
@@ -13,7 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.clevertec.newspaper.news.core.News;
+import ru.clevertec.newspaper.core.news.News;
 
 import java.time.LocalDateTime;
 

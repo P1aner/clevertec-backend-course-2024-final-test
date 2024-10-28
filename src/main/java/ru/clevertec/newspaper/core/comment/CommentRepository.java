@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.comment.core;
+package ru.clevertec.newspaper.core.comment;
 
 
 import org.springframework.data.domain.Page;

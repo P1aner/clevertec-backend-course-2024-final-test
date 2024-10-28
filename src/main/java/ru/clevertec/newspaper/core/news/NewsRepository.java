@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.news.core;
+package ru.clevertec.newspaper.core.news;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

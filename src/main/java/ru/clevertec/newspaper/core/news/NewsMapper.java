@@ -1,15 +1,15 @@
-package ru.clevertec.newspaper.news.core;
+package ru.clevertec.newspaper.core.news;
 
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import ru.clevertec.newspaper.comment.core.CommentMapper;
-import ru.clevertec.newspaper.news.api.dto.EdinNewsDto;
-import ru.clevertec.newspaper.news.api.dto.FullNewsDto;
-import ru.clevertec.newspaper.news.api.dto.NewNewsDto;
-import ru.clevertec.newspaper.news.api.dto.ShortNewsDto;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
+import ru.clevertec.newspaper.core.comment.CommentMapper;
+import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
+import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ import java.util.List;
         uses = {CommentMapper.class})
 public interface NewsMapper {
 
-    FullNewsDto toNewsDto(News news);
+    NewsDetailsDto toNewsDto(News news);
 
     News toNews(NewNewsDto news);
 
-    List<ShortNewsDto> toShortNewsListDto(List<News> news);
+    List<NewsTitleDto> toShortNewsListDto(List<News> news);
 
-    void updateNewsFromDto(EdinNewsDto dto, @MappingTarget News appUser);
+    void updateNewsFromDto(UpdateNewsDto dto, @MappingTarget News appUser);
 
 }
