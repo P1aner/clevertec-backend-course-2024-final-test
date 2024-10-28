@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.api.comment.ApiComment;
-import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
+import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-
-import java.util.List;
 
 
 @RestController
@@ -38,14 +36,10 @@ public class CommentController implements ApiComment {
         commentService.deleteComment(newsId, commentId);
     }
 
-    @Override
-    public List<CommentDetailsDto> getComments(Long newsId, String query, Pageable pageable) {
-        return commentService.findNewsComments(newsId, query, pageable);
-    }
 
     @Override
-    public NewsDetailsDto getAllCommentByNews(Long newsId, Pageable pageable) {
-        return commentService.getAllCommentOfNews(newsId, pageable);
+    public NewsDetailsDto findCommentByNews(Long newsId, String query, Pageable pageable) {
+        return commentService.findCommentByNews(newsId, query, pageable);
     }
 
 }

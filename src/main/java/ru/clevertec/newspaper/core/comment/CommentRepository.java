@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -19,5 +18,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     void deleteByNews_IdAndId(Long newsId, Long commentId);
 
-    List<Comment> findByTextContainsIgnoreCaseAndNews_Id(String text, Long id, Pageable pageable);
+    Page<Comment> findByTextContainsIgnoreCaseAndNews_Id(String text, Long id, Pageable pageable);
 }

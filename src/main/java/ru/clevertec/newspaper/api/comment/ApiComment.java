@@ -20,8 +20,6 @@ import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/news/{newsId}/comments")
 public interface ApiComment {
@@ -49,12 +47,7 @@ public interface ApiComment {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<CommentDetailsDto> getComments(@PathVariable Long newsId,
-                                        @RequestParam String query,
-                                        @ParameterObject @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable);
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    NewsDetailsDto getAllCommentByNews(@PathVariable Long newsId,
-                                       @ParameterObject @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable);
+    NewsDetailsDto findCommentByNews(@PathVariable Long newsId,
+                                     @RequestParam(required = false) String query,
+                                     @ParameterObject @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable);
 }
