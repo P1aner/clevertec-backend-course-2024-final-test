@@ -1,6 +1,6 @@
 logging:
   level:
-    root: "info"
+    ru.clevertec: "debug"
 spring:
   output:
     ansi:
