@@ -10,10 +10,13 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
-import ru.clevertec.newspaper.exception.ProblemUtils;
+import ru.clevertec.newspaper.exception.ProblemUtil;
 
 import java.util.List;
 
+/**
+ * Provides tools for working with the news
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,41 +25,75 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final NewsMapper newsMapper;
 
-
+    /**
+     * Adds the news
+     *
+     * @param newNewsDto News without id
+     * @return News with details
+     */
     public NewsDetailsDto createNews(NewNewsDto newNewsDto) {
         News news = newsMapper.toNews(newNewsDto);
         News save = newsRepository.save(news);
         return newsMapper.toNewsDto(save);
     }
 
-    public NewsDetailsDto findNews(Long id) {
-        News news = newsRepository.findById(id)
-            .orElseThrow(() -> ProblemUtils.newsNotFound(id));
+    /**
+     * Displays the news with details
+     * If the news is not found, it throws a ResourceNotFoundException.
+     *
+     * @param newsId News id
+     * @return News with details
+     */
+    public NewsDetailsDto findNews(Long newsId) {
+        News news = newsRepository.findById(newsId)
+            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
         return newsMapper.toNewsDto(news);
     }
 
-    public NewsDetailsDto updateNews(Long id, UpdateNewsDto updateNewsDto) {
-        News news = newsRepository.findById(id)
-            .orElseThrow(() -> ProblemUtils.newsNotFound(id));
+    /**
+     * Updates news fields without changing the ID
+     * If the news is not found, it throws a ResourceNotFoundException.
+     *
+     * @param newsId        News id
+     * @param updateNewsDto News without id
+     * @return News with details
+     */
+    public NewsDetailsDto updateNews(Long newsId, UpdateNewsDto updateNewsDto) {
+        News news = newsRepository.findById(newsId)
+            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
         newsMapper.updateNewsFromDto(updateNewsDto, news);
         News save = newsRepository.save(news);
         return newsMapper.toNewsDto(save);
     }
 
-    public void deleteNews(Long id) {
-        if (!newsRepository.existsById(id)) {
-            throw ProblemUtils.newsNotFound(id);
+    /**
+     * Deletes the news if it exists
+     * If the news is not found, it throws a ResourceNotFoundException.
+     *
+     * @param newsId News id
+     */
+    public void deleteNews(Long newsId) {
+        if (!newsRepository.existsById(newsId)) {
+            throw ProblemUtil.newsNotFound(newsId);
         }
-        newsRepository.deleteById(id);
+        newsRepository.deleteById(newsId);
     }
 
+    /**
+     * Searches for news containing the search text.
+     * If no search text is provided, displays all news.
+     *
+     * @param query    Search text
+     * @param pageable Settings of page
+     * @return News list
+     */
     public List<NewsTitleDto> findNews(String query, Pageable pageable) {
         Page<News> newsPage;
         if (StringUtils.isEmpty(query)) {
-            log.debug("Query is empty");
+            log.debug("Query is not empty");
             newsPage = newsRepository.findAll(pageable);
         } else {
-            log.debug("Query is not empty");
+            log.debug("Query is empty");
             newsPage = newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
         }
         return newsMapper.toShortNewsListDto(newsPage.getContent());

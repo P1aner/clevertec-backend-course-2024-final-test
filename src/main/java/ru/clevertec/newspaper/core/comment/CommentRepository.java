@@ -19,4 +19,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     void deleteByNews_IdAndId(Long newsId, Long commentId);
 
     Page<Comment> findByTextContainsIgnoreCaseAndNews_Id(String text, Long id, Pageable pageable);
+
+    boolean existsByNews_IdAndId(Long newsId, Long commentId);
 }

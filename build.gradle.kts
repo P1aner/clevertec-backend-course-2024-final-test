@@ -10,6 +10,11 @@ version = "0.0.1"
 val mapstructVersion = "1.6.2"
 val springDocOpenApi = "2.6.0"
 
+tasks.javadoc {
+    setDestinationDir(file("build/docs/javadoс"))
+    include("ru/clevertec/**")
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -37,11 +42,12 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApi")
     implementation("org.liquibase:liquibase-core")
-    implementation ("com.h2database:h2")
+    implementation("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
