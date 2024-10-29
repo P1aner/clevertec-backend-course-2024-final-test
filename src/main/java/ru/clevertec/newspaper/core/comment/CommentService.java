@@ -13,7 +13,7 @@ import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
-import ru.clevertec.newspaper.exception.ResourceNotFoundException;
+import ru.clevertec.newspaper.exception.ProblemUtils;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class CommentService {
     public CommentDetailsDto createComment(Long newsId, NewCommentDto newCommentDto) {
         Comment comment = commentMapper.toComment(newCommentDto);
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> getResourceNotFoundException("News", newsId));
+            .orElseThrow(() -> ProblemUtils.newsNotFound(newsId));
         comment.setNews(news);
         Comment save = commentRepository.save(comment);
         return commentMapper.toCommentDto(save);
@@ -38,13 +38,13 @@ public class CommentService {
 
     public CommentDetailsDto getComment(Long newsId, Long commentId) {
         Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-            .orElseThrow(() -> getResourceNotFoundException("Comment", commentId));
+            .orElseThrow(() -> ProblemUtils.commentNotFound(commentId));
         return commentMapper.toCommentDto(comment);
     }
 
     public CommentDetailsDto updateComment(Long newsId, Long commentId, UpdateCommentDto updateCommentDto) {
         Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-            .orElseThrow(() -> getResourceNotFoundException("Comment", commentId));
+            .orElseThrow(() -> ProblemUtils.commentNotFound(commentId));
         commentMapper.updateCommentFromDto(updateCommentDto, comment);
         Comment save = commentRepository.save(comment);
         return commentMapper.toCommentDto(save);
@@ -56,22 +56,18 @@ public class CommentService {
 
     public NewsDetailsDto findCommentByNews(Long id, String query, Pageable pageable) {
         News news = newsRepository.findById(id)
-            .orElseThrow(() -> getResourceNotFoundException("News", id));
+            .orElseThrow(() -> ProblemUtils.newsNotFound(id));
         Page<Comment> comments;
         if (StringUtils.isEmpty(query)) {
+            log.debug("Query is empty");
             comments = commentRepository.findByNews_Id(id, pageable);
         } else {
+            log.debug("Query is not empty");
             comments = commentRepository.findByTextContainsIgnoreCaseAndNews_Id(query, id, pageable);
         }
         List<Comment> content = comments.getContent();
         news.setCommentList(content);
         return newsMapper.toNewsDto(news);
 
-    }
-
-    private static ResourceNotFoundException getResourceNotFoundException(String type, Long id) {
-        String formatted = "%s id: %s not found.".formatted(type, id);
-        log.warn(formatted);
-        return new ResourceNotFoundException(formatted);
     }
 }

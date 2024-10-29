@@ -10,7 +10,7 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
-import ru.clevertec.newspaper.exception.ResourceNotFoundException;
+import ru.clevertec.newspaper.exception.ProblemUtils;
 
 import java.util.List;
 
@@ -31,13 +31,13 @@ public class NewsService {
 
     public NewsDetailsDto findNews(Long id) {
         News news = newsRepository.findById(id)
-            .orElseThrow(() -> getResourceNotFoundException(id));
+            .orElseThrow(() -> ProblemUtils.newsNotFound(id));
         return newsMapper.toNewsDto(news);
     }
 
     public NewsDetailsDto updateNews(Long id, UpdateNewsDto updateNewsDto) {
         News news = newsRepository.findById(id)
-            .orElseThrow(() -> getResourceNotFoundException(id));
+            .orElseThrow(() -> ProblemUtils.newsNotFound(id));
         newsMapper.updateNewsFromDto(updateNewsDto, news);
         News save = newsRepository.save(news);
         return newsMapper.toNewsDto(save);
@@ -45,23 +45,21 @@ public class NewsService {
 
     public void deleteNews(Long id) {
         if (!newsRepository.existsById(id)) {
-            throw getResourceNotFoundException(id);
+            throw ProblemUtils.newsNotFound(id);
         }
         newsRepository.deleteById(id);
     }
 
-    public List<NewsTitleDto> findNews(String q, Pageable pageable) {
-        if (StringUtils.isEmpty(q)) {
-            Page<News> newsPage = newsRepository.findAll(pageable);
-            return newsMapper.toShortNewsListDto(newsPage.getContent());
+    public List<NewsTitleDto> findNews(String query, Pageable pageable) {
+        Page<News> newsPage;
+        if (StringUtils.isEmpty(query)) {
+            log.debug("Query is empty");
+            newsPage = newsRepository.findAll(pageable);
+        } else {
+            log.debug("Query is not empty");
+            newsPage = newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
         }
-        Page<News> byTitleContainsIgnoreCaseAndTextContainsIgnoreCase = newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(q, q, pageable);
-        return newsMapper.toShortNewsListDto(byTitleContainsIgnoreCaseAndTextContainsIgnoreCase.getContent());
+        return newsMapper.toShortNewsListDto(newsPage.getContent());
     }
 
-    private static ResourceNotFoundException getResourceNotFoundException(Long id) {
-        String format = "News id: %s not found.".formatted(id);
-        log.warn(format);
-        return new ResourceNotFoundException(format);
-    }
 }
