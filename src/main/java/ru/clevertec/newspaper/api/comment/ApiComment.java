@@ -11,9 +11,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,9 +52,9 @@ public interface ApiComment {
                                      example = "1",
                                      required = true) Long commentId);
 
-    @PutMapping("{commentId}")
+    @PatchMapping("{commentId}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Update comment", description = "This PUT method update a news comment")
+    @Operation(summary = "Update comment", description = "This PATCH method update a news comment")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
     CommentDetailsDto updateComment(@PathVariable
                                     @Parameter(description = "News Id",

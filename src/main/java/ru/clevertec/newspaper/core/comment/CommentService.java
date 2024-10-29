@@ -111,7 +111,7 @@ public class CommentService {
             comments = commentRepository.findByNews_Id(newsId, pageable);
         } else {
             log.debug("Query is not empty");
-            comments = commentRepository.findByTextContainsIgnoreCaseAndNews_Id(query, id, pageable);
+            comments = commentRepository.findByTextContainsIgnoreCaseAndNews_Id(query, newsId, pageable);
         }
         List<Comment> content = comments.getContent();
         news.setCommentList(content);
