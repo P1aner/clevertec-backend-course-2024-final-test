@@ -86,7 +86,7 @@ public class CommentService {
      * @param commentId Comment id
      */
     public void deleteComment(Long newsId, Long commentId) {
-        if (commentRepository.existsByNews_IdAndId(newsId, commentId)) {
+        if (!commentRepository.existsByNews_IdAndId(newsId, commentId)) {
             throw ProblemUtil.commentNotFound(commentId);
         }
         commentRepository.deleteByNews_IdAndId(newsId, commentId);
