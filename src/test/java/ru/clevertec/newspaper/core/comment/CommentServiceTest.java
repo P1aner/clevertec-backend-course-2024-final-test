@@ -15,6 +15,7 @@ import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.core.news.News;
+import ru.clevertec.newspaper.core.news.NewsDataTest;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
 import ru.clevertec.newspaper.exception.ResourceNotFoundException;
@@ -130,16 +131,20 @@ class CommentServiceTest {
     @Test
     @DisplayName("Successful comment delete")
     void deleteComment() {
+        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
+
         Mockito.when(commentRepository.existsByNews_IdAndId(1L, 1L)).thenReturn(true);
+        Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.ofNullable(fullNewsWithoutComments));
 
         commentService.deleteComment(1L, 1L);
 
-        Mockito.verify(commentRepository, Mockito.times(1)).deleteByNews_IdAndId(1L, 1L);
+        Mockito.verify(commentRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
     @DisplayName("Fail comment delete")
     void failDeleteComment() {
+        Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(NewsDataTest.fullNewsWithoutComments()));
         Mockito.when(commentRepository.existsByNews_IdAndId(1L, 1L)).thenReturn(false);
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> commentService.deleteComment(1L, 1L));

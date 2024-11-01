@@ -86,10 +86,14 @@ public class CommentService {
      * @param commentId Comment id
      */
     public void deleteComment(Long newsId, Long commentId) {
+        News news = newsRepository.findById(newsId)
+            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
         if (!commentRepository.existsByNews_IdAndId(newsId, commentId)) {
             throw ProblemUtil.commentNotFound(commentId);
         }
-        commentRepository.deleteByNews_IdAndId(newsId, commentId);
+        news.getCommentList().removeIf(i -> i.getId().equals(commentId));
+        newsRepository.save(news);
+        commentRepository.deleteById(commentId);
     }
 
     /**

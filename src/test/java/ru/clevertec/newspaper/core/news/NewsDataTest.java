@@ -49,6 +49,15 @@ public class NewsDataTest {
             .build();
     }
 
+    public static News fullNewsWithoutCommentsAndId() {
+        return News.builder()
+            .title("Title")
+            .text("Text")
+            .localDateTime(LOCAL_DATE_TIME)
+            .commentList(new ArrayList<>())
+            .build();
+    }
+
     public static NewNewsDto newNewsDto() {
         return new NewNewsDto(LOCAL_DATE_TIME, "Title", "Text");
     }

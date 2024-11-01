@@ -1,13 +1,12 @@
 spring:
   profiles:
-      active:
-        - dev
+    active:
+      - dev
   application:
     name: newspaper
   datasource:
     username: username
     password: password
-    driver-class-name: driver-class-name
     url: url
   jpa:
     hibernate:
