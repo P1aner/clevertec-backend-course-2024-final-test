@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.clevertec.cache.Cache;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
@@ -29,6 +30,7 @@ public class CommentService {
     private final NewsRepository newsRepository;
     private final CommentMapper commentMapper;
     private final NewsMapper newsMapper;
+    private final Cache<String, Object> cache;
 
     /**
      * Adds a comment to an existing news article.
@@ -44,6 +46,10 @@ public class CommentService {
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
         comment.setNews(news);
         Comment save = commentRepository.save(comment);
+
+        String key = cache.generateKey(Comment.class, newsId, save.getId());
+        cache.put(key, save);
+
         return commentMapper.toCommentDto(save);
     }
 
@@ -56,9 +62,15 @@ public class CommentService {
      * @return Comment with details
      */
     public CommentDetailsDto getComment(Long newsId, Long commentId) {
-        Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-            .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
-        return commentMapper.toCommentDto(comment);
+        String key = cache.generateKey(Comment.class, commentId, newsId);
+        return commentMapper.toCommentDto(cache.get(key)
+            .map(m -> (Comment) m)
+            .orElseGet(() -> {
+                Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
+                    .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
+                cache.put(key, comment);
+                return comment;
+            }));
     }
 
     /**
@@ -75,6 +87,10 @@ public class CommentService {
             .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
         commentMapper.updateCommentFromDto(updateCommentDto, comment);
         Comment save = commentRepository.save(comment);
+
+        String key = cache.generateKey(Comment.class, commentId, newsId);
+        cache.put(key, save);
+
         return commentMapper.toCommentDto(save);
     }
 
@@ -92,8 +108,14 @@ public class CommentService {
             throw ProblemUtil.commentNotFound(commentId);
         }
         news.getCommentList().removeIf(i -> i.getId().equals(commentId));
-        newsRepository.save(news);
+
+        News save = newsRepository.save(news);
+        String newsKey = cache.generateKey(News.class, newsId);
+        cache.put(newsKey, save);
+
         commentRepository.deleteById(commentId);
+        String key = cache.generateKey(Comment.class, commentId, newsId);
+        cache.delete(key);
     }
 
     /**
@@ -120,6 +142,6 @@ public class CommentService {
         List<Comment> content = comments.getContent();
         news.setCommentList(content);
         return newsMapper.toNewsDto(news);
-
     }
+
 }

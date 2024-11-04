@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import ru.clevertec.cache.Cache;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
@@ -27,6 +28,8 @@ class NewsServiceTest {
     private NewsMapper newsMapper;
     @Mock
     private NewsRepository newsRepository;
+    @Mock
+    private Cache<String, Object> cache;
 
     @InjectMocks
     private NewsService newsService;
@@ -109,7 +112,7 @@ class NewsServiceTest {
 
     @Test
     @DisplayName("Delete news from repository")
-    void deleteNews() {
+    void delete() {
         Mockito.when(newsRepository.existsById(1L)).thenReturn(true);
 
         newsService.deleteNews(1L);
@@ -119,7 +122,7 @@ class NewsServiceTest {
 
     @Test
     @DisplayName("Delete non-existent news from repository")
-    void failDeleteNews() {
+    void failDelete() {
         Mockito.when(newsRepository.existsById(1L)).thenReturn(false);
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> newsService.deleteNews(1L));

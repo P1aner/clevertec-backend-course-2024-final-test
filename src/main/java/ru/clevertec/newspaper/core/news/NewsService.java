@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.clevertec.cache.Cache;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
@@ -24,6 +25,7 @@ public class NewsService {
 
     private final NewsRepository newsRepository;
     private final NewsMapper newsMapper;
+    private final Cache<String, Object> cache;
 
     /**
      * Adds the news
@@ -34,6 +36,10 @@ public class NewsService {
     public NewsDetailsDto createNews(NewNewsDto newNewsDto) {
         News news = newsMapper.toNews(newNewsDto);
         News save = newsRepository.save(news);
+
+        String key = cache.generateKey(News.class, save.getId());
+        cache.put(key, save);
+
         return newsMapper.toNewsDto(save);
     }
 
@@ -45,9 +51,15 @@ public class NewsService {
      * @return News with details
      */
     public NewsDetailsDto findNews(Long newsId) {
-        News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
-        return newsMapper.toNewsDto(news);
+        String key = cache.generateKey(News.class, newsId);
+        return newsMapper.toNewsDto(cache.get(key)
+            .map(m -> (News) m)
+            .orElseGet(() -> {
+                News news = newsRepository.findById(newsId)
+                    .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+                cache.put(key, news);
+                return news;
+            }));
     }
 
     /**
@@ -63,6 +75,10 @@ public class NewsService {
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
         newsMapper.updateNewsFromDto(updateNewsDto, news);
         News save = newsRepository.save(news);
+
+        String key = cache.generateKey(News.class, newsId);
+        cache.put(key, save);
+
         return newsMapper.toNewsDto(save);
     }
 
@@ -77,6 +93,9 @@ public class NewsService {
             throw ProblemUtil.newsNotFound(newsId);
         }
         newsRepository.deleteById(newsId);
+
+        String key = cache.generateKey(News.class, newsId);
+        cache.delete(key);
     }
 
     /**

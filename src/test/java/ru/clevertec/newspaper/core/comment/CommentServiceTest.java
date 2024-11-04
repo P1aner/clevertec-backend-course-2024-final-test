@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import ru.clevertec.cache.Cache;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
@@ -34,6 +35,8 @@ class CommentServiceTest {
     private CommentMapper commentMapper;
     @Mock
     private NewsMapper newsMapper;
+    @Mock
+    private Cache<String, Object> cache;
 
     @InjectMocks
     private CommentService commentService;
