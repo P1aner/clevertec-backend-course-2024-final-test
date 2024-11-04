@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.config;
+package ru.clevertec.loggin.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,7 +17,7 @@ public class LoggingAspect {
         // Pointcut for #logMethod
     }
 
-    @Pointcut("within(ru.clevertec.newspaper..*)")
+    @Pointcut("within(ru.clevertec..*)")
     public void applicationPackagePointcut() {
         // Pointcut for #logMethod
     }

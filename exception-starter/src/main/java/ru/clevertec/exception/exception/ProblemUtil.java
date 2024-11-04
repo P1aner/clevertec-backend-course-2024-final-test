@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.exception;
+package ru.clevertec.exception.exception;
 
 import lombok.extern.slf4j.Slf4j;
 

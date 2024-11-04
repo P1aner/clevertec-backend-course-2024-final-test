@@ -1,9 +1,8 @@
-package ru.clevertec.newspaper.config;
+package ru.clevertec.loggin.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import ru.clevertec.loggin.aspect.LoggingAspect;
 
-@Configuration
 public class LogConfiguration {
 
     @Bean

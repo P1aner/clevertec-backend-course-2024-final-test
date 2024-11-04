@@ -9,6 +9,8 @@ version = "0.0.1"
 
 val mapstructVersion = "1.6.2"
 val springDocOpenApi = "2.6.0"
+val logginStarterVersion = "0.0.1"
+val exceptionStarterVersion = "0.0.1"
 
 tasks.javadoc {
     setDestinationDir(file("build/docs/javadoс"))
@@ -34,20 +36,20 @@ repositories {
 }
 
 dependencies {
-
     implementation("org.zalando:problem-spring-web-starter:0.29.1")
-    implementation("org.zalando:jackson-datatype-problem:0.27.1")
-    implementation("org.zalando:problem:0.27.1")
-    implementation("org.zalando:problem-violations:0.29.1")
+
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApi")
     implementation("org.liquibase:liquibase-core")
     implementation("com.h2database:h2")
+
+    implementation("ru.clevertec:loggin-starter:${logginStarterVersion}")
+    implementation("ru.clevertec:exception-starter:${exceptionStarterVersion}")
+
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
@@ -57,6 +59,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
 }
 
 tasks.withType<Test> {

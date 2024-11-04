@@ -14,7 +14,7 @@ import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
-import ru.clevertec.newspaper.exception.ProblemUtil;
+import ru.clevertec.exception.exception.ProblemUtil;
 
 import java.util.List;
 
