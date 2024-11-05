@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProblemUtil {
 
+    private ProblemUtil() {
+    }
+
     public static ResourceNotFoundException newsNotFound(Long id) {
         String format = "News id: %s not found.".formatted(id);
         log.warn(format);
