@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import ru.clevertec.cache.Cache;
+import ru.clevertec.exception.exception.ResourceNotFoundException;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
@@ -19,7 +20,6 @@ import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsDataTest;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
-import ru.clevertec.newspaper.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

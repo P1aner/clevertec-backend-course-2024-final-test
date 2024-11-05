@@ -11,6 +11,7 @@ val mapstructVersion = "1.6.2"
 val springDocOpenApi = "2.6.0"
 val logginStarterVersion = "0.0.1"
 val exceptionStarterVersion = "0.0.1"
+extra["springCloudVersion"] = "2023.0.3"
 
 tasks.javadoc {
     setDestinationDir(file("build/docs/javadoс"))
@@ -37,6 +38,7 @@ repositories {
 
 dependencies {
     implementation("org.zalando:problem-spring-web-starter:0.29.1")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
@@ -60,6 +62,12 @@ dependencies {
     testImplementation("org.testcontainers:postgresql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
 }
 
 tasks.withType<Test> {

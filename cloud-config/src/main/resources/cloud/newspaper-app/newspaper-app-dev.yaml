@@ -1,0 +1,18 @@
+logging:
+  level:
+    ru.clevertec: "debug"
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:h2:mem:newspaper
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+

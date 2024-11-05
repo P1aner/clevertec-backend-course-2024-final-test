@@ -22,7 +22,7 @@ services:
       - '1000:8080'
     build:
       dockerfile: Dockerfile
-      context: .
+      context: ..
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/newspaper
