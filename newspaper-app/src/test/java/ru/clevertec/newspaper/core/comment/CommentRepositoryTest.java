@@ -10,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import ru.clevertec.newspaper.PostgresContainerConfiguration;
-import ru.clevertec.newspaper.core.news.NewsRepository;
 
 import java.util.Optional;
 
@@ -24,14 +23,11 @@ class CommentRepositoryTest extends PostgresContainerConfiguration {
     @Autowired
     private CommentRepository commentRepository;
 
-    @Autowired
-    private NewsRepository newsRepository;
-
     @Test
     void findByNews_Id() {
         Page<Comment> byNewsId = commentRepository.findByNews_Id(1L, PageRequest.of(0, 10));
 
-        Assertions.assertEquals(byNewsId.getContent().size(), 1);
+        Assertions.assertEquals(1, byNewsId.getContent().size());
     }
 
     @Test
@@ -45,14 +41,14 @@ class CommentRepositoryTest extends PostgresContainerConfiguration {
     void findByTextContainsIgnoreCaseAndNews_Id() {
         int size = commentRepository.findByTextContainsIgnoreCaseAndNews_Id("Text", 1L, PageRequest.of(0, 10)).getContent().size();
 
-        Assertions.assertEquals(size, 1);
+        Assertions.assertEquals(1, size);
     }
 
     @Test
     void failFindByTextContainsIgnoreCaseAndNews_Id() {
         int size = commentRepository.findByTextContainsIgnoreCaseAndNews_Id("Not text", 1L, PageRequest.of(0, 10)).getContent().size();
 
-        Assertions.assertEquals(size, 0);
+        Assertions.assertEquals(0, size);
     }
 
     @Test

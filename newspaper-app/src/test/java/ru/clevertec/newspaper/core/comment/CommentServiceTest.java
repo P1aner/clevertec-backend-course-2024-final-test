@@ -59,8 +59,8 @@ class CommentServiceTest {
         CommentDetailsDto comment = commentService.createComment(1L, newCommentDto);
 
         Assertions.assertEquals(comment, commentDetailsDto);
-        Assertions.assertEquals(comment.id(), 1L);
-        Assertions.assertEquals(fullCommentWithoutNewsAndId.getNews().getId(), 1);
+        Assertions.assertEquals(1L, comment.id());
+        Assertions.assertEquals(1, fullCommentWithoutNewsAndId.getNews().getId());
 
         Mockito.verify(commentRepository, Mockito.times(1)).save(Mockito.any());
         Mockito.verify(commentMapper, Mockito.times(1)).toComment(Mockito.any());
@@ -198,6 +198,10 @@ class CommentServiceTest {
     void failFindCommentByNews() {
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(ResourceNotFoundException.class, () -> commentService.findCommentByNews(1L, "", Pageable.ofSize(1)));
+        Assertions.assertThrows(ResourceNotFoundException.class, this::getCommentByNews);
+    }
+
+    private void getCommentByNews() {
+        commentService.findCommentByNews(1L, "", Pageable.ofSize(1));
     }
 }

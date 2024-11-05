@@ -1,6 +1,8 @@
 package ru.clevertec.newspaper.core.comment;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
+import org.junit.function.ThrowingRunnable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +26,7 @@ import java.time.LocalDateTime;
 @ContextConfiguration(classes = PostgresContainerConfiguration.class)
 @Sql(scripts = "/db/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/db/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class CommentE2ETest extends PostgresContainerConfiguration {
+class CommentE2ETest extends PostgresContainerConfiguration {
 
     @LocalServerPort
     private int port;
@@ -45,7 +47,7 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
             .toEntity(CommentDetailsDto.class);
         CommentDetailsDto commentDetailsDto = response.getBody();
 
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
         Assertions.assertEquals(commentDetailsDto, commentDetailsDto1);
     }
 
@@ -63,18 +65,17 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
         CommentDetailsDto commentDetailsDto = response.getBody();
 
         Assertions.assertEquals(commentDetailsDto, commentDetailsDto1);
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void negativeCaseGetCommentRequest() {
         String uri = "http://localhost:%s/api/news/2/comments/1".formatted(port);
 
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .get()
             .uri(uri)
-            .retrieve()
-            .toEntity(CommentDetailsDto.class));
+            .retrieve()));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
@@ -95,20 +96,19 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
         CommentDetailsDto commentDetailsDto = response.getBody();
 
         Assertions.assertEquals(commentDetailsDto, commentDetailsDto1);
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void negativeCasePatchCommentRequest() {
         String uri = "http://localhost:%s/api/news/2/comments/1".formatted(port);
 
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .patch()
             .uri(uri)
             .body(CommentDataTest.UPDATE_COMMENT)
             .contentType(MediaType.APPLICATION_JSON)
-            .retrieve()
-            .toEntity(CommentDetailsDto.class));
+            .retrieve()));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
@@ -124,7 +124,7 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
             .retrieve()
             .toEntity(CommentDetailsDto.class);
 
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+        Assertions.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test
@@ -136,15 +136,19 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
             .uri(uri)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .get()
             .uri(uri)
-            .retrieve()
-            .toEntity(CommentDetailsDto.class));
+            .retrieve()));
 
-        Assertions.assertEquals(entity.getStatusCode(), HttpStatus.NO_CONTENT);
+        Assertions.assertEquals(HttpStatus.NO_CONTENT, entity.getStatusCode());
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
+    }
+
+    private @NotNull ThrowingRunnable getThrowingRunnable(RestClient.ResponseSpec restClient) {
+        return () -> restClient
+            .toEntity(CommentDetailsDto.class);
     }
 
     @Test
@@ -159,7 +163,7 @@ public class CommentE2ETest extends PostgresContainerConfiguration {
             .toEntity(NewsDetailsDto.class);
         NewsDetailsDto body = entity.getBody();
 
-        Assertions.assertEquals(entity.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK, entity.getStatusCode());
         Assertions.assertEquals(body, newsDetailsDto);
     }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 @ContextConfiguration(classes = PostgresContainerConfiguration.class)
 @Sql(scripts = "/db/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/db/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class NewsRepositoryTest extends PostgresContainerConfiguration {
+class NewsRepositoryTest extends PostgresContainerConfiguration {
 
     @Autowired
     private NewsRepository newsRepository;
@@ -29,22 +29,22 @@ public class NewsRepositoryTest extends PostgresContainerConfiguration {
         Optional<News> byId = newsRepository.findById(1L);
 
         Assertions.assertTrue(byId.isPresent());
-        Assertions.assertEquals(byId.get().getText(), "Text");
-        Assertions.assertEquals(byId.get().getTitle(), "Title");
-        Assertions.assertEquals(byId.get().getCommentList().size(), 1);
+        Assertions.assertEquals("Text", byId.get().getText());
+        Assertions.assertEquals("Title", byId.get().getTitle());
+        Assertions.assertEquals(1, byId.get().getCommentList().size());
     }
 
     @Test
     void findAll() {
-        News save = newsRepository.save(NewsDataTest.fullNewsWithoutCommentsAndId());
+        newsRepository.save(NewsDataTest.fullNewsWithoutCommentsAndId());
         List<News> all = newsRepository.findAll();
-        Assertions.assertEquals(all.size(), 2);
+        Assertions.assertEquals(2, all.size());
     }
 
     @Test
     void saveNews() {
         News save = newsRepository.save(NewsDataTest.fullNewsWithoutCommentsAndId());
-        Assertions.assertEquals(save.getId(), 2L);
+        Assertions.assertEquals(2L, save.getId());
     }
 
     @Test

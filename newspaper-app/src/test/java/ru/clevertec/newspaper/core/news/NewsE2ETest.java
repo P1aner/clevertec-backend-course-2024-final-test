@@ -1,5 +1,6 @@
 package ru.clevertec.newspaper.core.news;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ import java.util.List;
 @ContextConfiguration(classes = PostgresContainerConfiguration.class)
 @Sql(scripts = "/db/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "/db/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class NewsE2ETest extends PostgresContainerConfiguration {
+class NewsE2ETest extends PostgresContainerConfiguration {
 
     @LocalServerPort
     private int port;
@@ -39,45 +40,35 @@ public class NewsE2ETest extends PostgresContainerConfiguration {
         String uri = "http://localhost:%s/api/news".formatted(port);
         NewsDetailsDto newsDetailsDto1 = new NewsDetailsDto(2L, LocalDateTime.of(2024, 12, 12, 12, 12), "Title", "Text", null);
 
-        ResponseEntity<NewsDetailsDto> response = restClient
+        ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .post()
             .uri(uri)
             .contentType(MediaType.APPLICATION_JSON)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class);
+            .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
 
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
         Assertions.assertEquals(newsDetailsDto, newsDetailsDto1);
     }
-
 
     @Test
     void positiveCaseGetNewsRequest() {
         String uri = "http://localhost:%s/api/news/1".formatted(port);
         NewsDetailsDto newsDetailsDto1 = NewsDataTest.newsDetailsDto();
 
-        ResponseEntity<NewsDetailsDto> response = restClient
-            .get()
-            .uri(uri)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class);
+        ResponseEntity<NewsDetailsDto> response = getNewsDetailsDtoResponseEntity(uri);
         NewsDetailsDto newsDetailsDto = response.getBody();
 
         Assertions.assertEquals(newsDetailsDto, newsDetailsDto1);
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void negativeCaseGetNewsRequest() {
         String uri = "http://localhost:%s/api/news/2".formatted(port);
 
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
-            .get()
-            .uri(uri)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class));
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> getNewsDetailsDtoResponseEntity(uri));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("News id: 2 not found."));
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
@@ -88,66 +79,75 @@ public class NewsE2ETest extends PostgresContainerConfiguration {
         String uri = "http://localhost:%s/api/news/1".formatted(port);
         NewsDetailsDto newsDetailsDto1 = NewsDataTest.newsDetailsDto();
 
-        ResponseEntity<NewsDetailsDto> response = restClient
+        ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .patch()
             .uri(uri)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
             .contentType(MediaType.APPLICATION_JSON)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class);
+            .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
 
         Assertions.assertEquals(newsDetailsDto, newsDetailsDto1);
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
     void negativeCasePatchNewsRequest() {
         String uri = "http://localhost:%s/api/news/2".formatted(port);
 
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> getEntity(uri));
+
+        Assertions.assertTrue(httpClientErrorException.getMessage().contains("News id: 2 not found."));
+        Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
+    }
+
+    private void getEntity(String uri) {
+        restClient
             .patch()
             .uri(uri)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
             .contentType(MediaType.APPLICATION_JSON)
             .retrieve()
-            .toEntity(CommentDetailsDto.class));
-
-        Assertions.assertTrue(httpClientErrorException.getMessage().contains("News id: 2 not found."));
-        Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
+            .toEntity(CommentDetailsDto.class);
     }
 
     @Test
     void deleteNews() {
         String uri = "http://localhost:%s/api/news/1".formatted(port);
 
-        ResponseEntity<NewsDetailsDto> response = restClient
+        ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .delete()
             .uri(uri)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class);
+            .retrieve());
 
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+        Assertions.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test
     void afterDeleteNews() {
         String uri = "http://localhost:%s/api/news/1".formatted(port);
 
-        ResponseEntity<NewsDetailsDto> entity = restClient
+        ResponseEntity<NewsDetailsDto> entity = getEntity(restClient
             .delete()
             .uri(uri)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class);
-        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> restClient
-            .get()
-            .uri(uri)
-            .retrieve()
-            .toEntity(NewsDetailsDto.class));
+            .retrieve());
+        HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> getNewsDetailsDtoResponseEntity(uri));
 
-        Assertions.assertEquals(entity.getStatusCode(), HttpStatus.NO_CONTENT);
+        Assertions.assertEquals(HttpStatus.NO_CONTENT, entity.getStatusCode());
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("News id: 1 not found."));
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("404"));
+    }
+
+    private @NotNull ResponseEntity<NewsDetailsDto> getNewsDetailsDtoResponseEntity(String uri) {
+        return getEntity(restClient
+            .get()
+            .uri(uri)
+            .retrieve());
+    }
+
+    private @NotNull ResponseEntity<NewsDetailsDto> getEntity(RestClient.ResponseSpec restClient) {
+        return restClient
+            .toEntity(NewsDetailsDto.class);
     }
 
     @Test
@@ -162,9 +162,10 @@ public class NewsE2ETest extends PostgresContainerConfiguration {
             });
         List<NewsTitleDto> body = entity.getBody();
 
-        Assertions.assertEquals(entity.getStatusCode(), HttpStatus.OK);
-        Assertions.assertEquals(body.size(), 1);
-        Assertions.assertEquals(body.getFirst().title(), "Title");
-        Assertions.assertEquals(body.getFirst().id(), 1L);
+        Assertions.assertEquals(HttpStatus.OK, entity.getStatusCode());
+        assert body != null;
+        Assertions.assertEquals(1, body.size());
+        Assertions.assertEquals("Title", body.getFirst().title());
+        Assertions.assertEquals(1L, body.getFirst().id());
     }
 }
