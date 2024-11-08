@@ -30,6 +30,7 @@ public class News {
     @Column(name = "id", nullable = false)
     private Long id;
     private LocalDateTime localDateTime;
+    private String username;
     private String title;
     private String text;
     @OneToMany(mappedBy = "news", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

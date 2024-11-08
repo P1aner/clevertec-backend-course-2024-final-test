@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 public record NewNewsDto(
     @Schema(description = "Date", example = "2024.12.12 12:12")
     LocalDateTime localDateTime,
+    @Schema(description = "Username", example = "user")
+    String username,
     @Schema(description = "News title", example = "Title of news")
     String title,
     @Schema(description = "News text", example = "Text of news")

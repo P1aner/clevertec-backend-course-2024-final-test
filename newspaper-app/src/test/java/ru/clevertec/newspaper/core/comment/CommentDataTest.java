@@ -61,15 +61,6 @@ public class CommentDataTest {
             .build();
     }
 
-    public static Comment fullCommentWithoutId() {
-        return Comment.builder()
-            .username("username")
-            .text("Text of fullComment")
-            .localDateTime(LocalDateTime.of(2024, 12, 12, 12, 12))
-            .news(fullNewsWithoutComments())
-            .build();
-    }
-
     public static Comment fullCommentWithoutNews() {
         return Comment.builder()
             .id(1L)
@@ -110,7 +101,7 @@ public class CommentDataTest {
     }
 
     public static NewsDetailsDto newsDetailsDto() {
-        return new NewsDetailsDto(1L, LocalDateTime.of(2024, 12, 12, 12, 12), "Title", "Text", List.of(commentDetailsDto()));
+        return new NewsDetailsDto(1L, LocalDateTime.of(2024, 12, 12, 12, 12), "user", "Title", "Text", List.of(commentDetailsDto()));
     }
 
 }

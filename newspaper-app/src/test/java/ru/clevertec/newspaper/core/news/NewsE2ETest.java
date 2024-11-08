@@ -1,12 +1,18 @@
 package ru.clevertec.newspaper.core.news;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +25,7 @@ import ru.clevertec.newspaper.PostgresContainerConfiguration;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.core.secure.SecureDataTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,6 +37,18 @@ import java.util.List;
 @Sql(scripts = "/db/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class NewsE2ETest extends PostgresContainerConfiguration {
 
+    @RegisterExtension
+    static WireMockExtension wm = WireMockExtension.newInstance()
+        .options(WireMockConfiguration.wireMockConfig().port(1000))
+        .build();
+
+    @BeforeEach
+    public void configureWireMock() {
+        wm.stubFor(WireMock.get("/api/users?username=root")
+            .willReturn(WireMock.okJson(SecureDataTest.SECURED_USER_JSON)
+                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)));
+    }
+
     @LocalServerPort
     private int port;
 
@@ -38,18 +57,19 @@ class NewsE2ETest extends PostgresContainerConfiguration {
     @Test
     void positiveCasePostNewsRequest() {
         String uri = "http://localhost:%s/api/news".formatted(port);
-        NewsDetailsDto newsDetailsDto1 = new NewsDetailsDto(2L, LocalDateTime.of(2024, 12, 12, 12, 12), "Title", "Text", null);
+        NewsDetailsDto newsDetailsDto1 = new NewsDetailsDto(2L, LocalDateTime.of(2024, 12, 12, 12, 12), "user", "Title", "Text", null);
 
         ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .post()
             .uri(uri)
             .contentType(MediaType.APPLICATION_JSON)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
 
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        Assertions.assertEquals(newsDetailsDto, newsDetailsDto1);
+        Assertions.assertEquals(newsDetailsDto1, newsDetailsDto);
     }
 
     @Test
@@ -84,6 +104,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
             .uri(uri)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
             .contentType(MediaType.APPLICATION_JSON)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
 
@@ -107,6 +128,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
             .uri(uri)
             .body(NewsDataTest.NEW_NEWS_CONTENT)
             .contentType(MediaType.APPLICATION_JSON)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
     }
@@ -118,6 +140,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
         ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .delete()
             .uri(uri)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve());
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
@@ -130,6 +153,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
         ResponseEntity<NewsDetailsDto> entity = getEntity(restClient
             .delete()
             .uri(uri)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve());
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, () -> getNewsDetailsDtoResponseEntity(uri));
 
@@ -142,6 +166,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
         return getEntity(restClient
             .get()
             .uri(uri)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve());
     }
 
@@ -157,6 +182,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
         ResponseEntity<List<NewsTitleDto>> entity = restClient
             .get()
             .uri(uri)
+            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
             .retrieve()
             .toEntity(new ParameterizedTypeReference<>() {
             });

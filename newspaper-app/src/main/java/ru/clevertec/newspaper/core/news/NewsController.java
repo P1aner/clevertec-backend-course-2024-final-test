@@ -2,6 +2,7 @@ package ru.clevertec.newspaper.core.news;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.api.news.NewsApi;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
@@ -26,6 +27,7 @@ public class NewsController implements NewsApi {
      * @return News with details
      */
     @Override
+    @PreAuthorize("hasRole('ADMIN') || (hasRole('JOURNALIST') && (#newNewsDto.username == authentication.name))")
     public NewsDetailsDto createNews(NewNewsDto newNewsDto) {
         return newsService.createNews(newNewsDto);
     }
@@ -49,6 +51,7 @@ public class NewsController implements NewsApi {
      * @return News with details
      */
     @Override
+    @AdminAndNewsOwnerCanEdit
     public NewsDetailsDto updateNews(Long newsId, UpdateNewsDto updateNewsDto) {
         return newsService.updateNews(newsId, updateNewsDto);
     }
@@ -59,6 +62,7 @@ public class NewsController implements NewsApi {
      * @param newsId News id
      */
     @Override
+    @AdminAndNewsOwnerCanEdit
     public void deleteNews(Long newsId) {
         newsService.deleteNews(newsId);
     }

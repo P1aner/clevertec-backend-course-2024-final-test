@@ -17,6 +17,7 @@ public class NewsDataTest {
     public static final String NEW_NEWS_CONTENT = """
         {
         "localDateTime":"2024-12-12T12:12:00",
+        "username":"user",
         "title":"Title",
         "text":"Text"
         }
@@ -26,6 +27,7 @@ public class NewsDataTest {
         {
         "id":1,
         "localDateTime":"2024-12-12T12:12:00",
+        "username":"user",
         "title":"Title",
         "text":"Text",
         "commentList":[]
@@ -43,6 +45,7 @@ public class NewsDataTest {
         return News.builder()
             .id(1L)
             .title("Title")
+            .username("user")
             .text("Text")
             .localDateTime(LOCAL_DATE_TIME)
             .commentList(new ArrayList<>())
@@ -52,6 +55,7 @@ public class NewsDataTest {
     public static News fullNewsWithoutCommentsAndId() {
         return News.builder()
             .title("Title")
+            .username("user")
             .text("Text")
             .localDateTime(LOCAL_DATE_TIME)
             .commentList(new ArrayList<>())
@@ -59,15 +63,15 @@ public class NewsDataTest {
     }
 
     public static NewNewsDto newNewsDto() {
-        return new NewNewsDto(LOCAL_DATE_TIME, "Title", "Text");
+        return new NewNewsDto(LOCAL_DATE_TIME, "user", "Title", "Text");
     }
 
     public static NewsDetailsDto newsDetailsDto() {
-        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "Title", "Text", List.of(CommentDataTest.commentDetailsDto()));
+        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "user", "Title", "Text", List.of(CommentDataTest.commentDetailsDto()));
     }
 
     public static UpdateNewsDto updateNewsDto() {
-        return new UpdateNewsDto(LOCAL_DATE_TIME, "Title", "Text");
+        return new UpdateNewsDto(LOCAL_DATE_TIME, "user", "Title", "Text");
     }
 
     public static NewsTitleDto newsTitleDto() {
@@ -75,7 +79,7 @@ public class NewsDataTest {
     }
 
     public static NewsDetailsDto newsDetailsDtoWithoutComments() {
-        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "Title", "Text", List.of());
+        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "user", "Title", "Text", List.of());
 
     }
 }

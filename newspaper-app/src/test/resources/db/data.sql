@@ -1,2 +1,2 @@
-INSERT INTO news (local_date_time, text, title) VALUES ('2024-12-12T12:12:00', 'Text', 'Title');
+INSERT INTO news (local_date_time, username, text, title) VALUES ('2024-12-12T12:12:00', 'user', 'Text', 'Title');
 INSERT INTO comment(local_date_time, news_id, text, username) VALUES ('2024-12-12T12:12:00', 1, 'Text', 'username');

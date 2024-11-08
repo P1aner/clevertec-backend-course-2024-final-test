@@ -10,6 +10,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Хоррор Slay the Princess перевели на русский язык, добавили тысячу иллюстраций, реплик и не только"
               - column:
@@ -171,6 +174,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Маунт WoW за $90 не предел, китайцы заплатят Blizzard ещё больше, поскольку транспорт продают в комплекте с валютой"
@@ -335,6 +341,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Euro Truck Simulator 2 получила реворк грузовика Volvo FH Series 4 и Германии, улучшения камеры. Стартовал открытый бета-тест обновления 1.53"
               - column:
@@ -497,6 +506,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Шутер Call of Duty Black Ops 6 получил поддержку облачного сервиса VK Play Cloud"
@@ -661,6 +673,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Вышел новый трейлер вампирской игры-песочницы Vampire Dynasty"
               - column:
@@ -824,6 +839,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Call of Duty Black Ops 6 стартовала в Steam со смешанных отзывов, некоторые не могут найти игру в меню и шутер часто вылетает"
               - column:
@@ -985,6 +1003,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Симулятор бокса Undisputed получает в основном отрицательные отзывы в Steam. Полная версия игры разочаровала геймеров"
@@ -1149,6 +1170,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "GTA San Andreas исполнилось 20 лет. Фанатский мод SilentPatch получил крупнейшее обновление в честь юбилея"
               - column:
@@ -1311,6 +1335,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Анимационный сериал Tomb Raider: The Legend of Lara Croft получит второй сезон"
@@ -1475,6 +1502,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "RTS Men of War 2 получила офлайн-режим спустя 5 месяцев после релиза, а также появились новые юниты"
               - column:
@@ -1638,6 +1668,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Зарянка из Honkai Star Rail получила официальные наушники. Новый коллаб с Moondrop"
               - column:
@@ -1799,6 +1832,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Симулятор могильщика + Carmageddon: анонсировали Sleep Well Cemetery, где оживших мертвецов придётся загонять назад в могилы"
@@ -1963,6 +1999,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Инсайдер опроверг слухи: AMD не отменяла топовый Ryzen Z2 Extreme для портативных ПК"
               - column:
@@ -2126,6 +2165,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Digital Foundry впечатлил апгрейд гонок F1 24 на PlayStation 5 Pro"
               - column:
@@ -2182,6 +2224,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: news_id
                   value: "14"
@@ -2288,6 +2333,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "Valve анонсировала Фестиваль «Страхи в Steam 3». Скоро начнётся тематическая распродажа"
@@ -2452,6 +2500,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Трассировка лучей: зло или благо? Детальное исследование Hardware Unboxed"
               - column:
@@ -2613,6 +2664,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "В Euro Truck Simulator 2 и ATS запустили хэллоуинский ивент с тыквами и наградами за доставки грузов"
@@ -2777,6 +2831,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "Аудитория Dead Island 2 превысила 10 миллионов человек"
               - column:
@@ -2940,6 +2997,9 @@ databaseChangeLog:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
               - column:
+                  name: username
+                  value: "user"
+              - column:
                   name: text
                   value: "В ремейке Silent Hill 2 исправили ошибку, запиравшую героя в Лабиринте, и добавили облачные сохранения Steam"
               - column:
@@ -3102,6 +3162,9 @@ databaseChangeLog:
               - column:
                   name: local_date_time
                   value: "2004-10-19 10:23:54+02"
+              - column:
+                  name: username
+                  value: "user"
               - column:
                   name: text
                   value: "В стиле EGS: магазин GOG получит эксклюзивный ремастер хита 1997 года"

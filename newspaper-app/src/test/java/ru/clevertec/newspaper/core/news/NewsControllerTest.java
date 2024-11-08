@@ -1,20 +1,30 @@
 package ru.clevertec.newspaper.core.news;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.config.sequrity.SecurityConfig;
+import ru.clevertec.newspaper.core.secure.SecureDataTest;
 
 import java.util.List;
 
 @WebMvcTest(NewsController.class)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration
+@Import(SecurityConfig.class)
 class NewsControllerTest {
 
 
@@ -25,12 +35,14 @@ class NewsControllerTest {
     private NewsService newsService;
 
     @Test
+    @WithMockUser(username = "root", roles = "ADMIN")
     void createNews() throws Exception {
         NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDtoWithoutComments();
 
         Mockito.when(newsService.createNews(Mockito.any())).thenReturn(newsDetailsDto);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/news")
+                .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(NewsDataTest.NEW_NEWS_CONTENT))
             .andExpect(MockMvcResultMatchers.status().isCreated())
@@ -38,24 +50,28 @@ class NewsControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "root", roles = "ADMIN")
     void getNews() throws Exception {
         NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDtoWithoutComments();
 
         Mockito.when(newsService.findNews(Mockito.any())).thenReturn(newsDetailsDto);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/news/1")
+                .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.content().json(NewsDataTest.FULL_NEWS));
     }
 
     @Test
+    @WithMockUser(username = "root", roles = "ADMIN")
     void updateNews() throws Exception {
         NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDtoWithoutComments();
 
         Mockito.when(newsService.updateNews(Mockito.any(), Mockito.any())).thenReturn(newsDetailsDto);
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/news/1")
+                .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(NewsDataTest.NEW_NEWS_CONTENT))
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -63,17 +79,21 @@ class NewsControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "root", roles = "ADMIN")
     void deleteNews() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/news/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/news/1")
+                .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC))
             .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
     @Test
+    @WithMockUser(username = "root", roles = "ADMIN")
     void findNews() throws Exception {
         NewsTitleDto newsTitleDto = NewsDataTest.newsTitleDto();
         Mockito.when(newsService.findNews(Mockito.any(), Mockito.any())).thenReturn(List.of(newsTitleDto));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/news")
+                .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.content().json(NewsDataTest.TITLE_NEWS_LIST));

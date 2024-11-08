@@ -9,6 +9,15 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+    openfeign:
+      client:
+        config:
+          users:
+            url: http://localhost:1000/api
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: basic
   jpa:
     hibernate:
       ddl-auto: validate

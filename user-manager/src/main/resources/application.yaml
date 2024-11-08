@@ -1,0 +1,17 @@
+spring:
+  liquibase:
+    enabled: true
+  application:
+    name: user-manager
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/user-manager
+server:
+  port: 1000

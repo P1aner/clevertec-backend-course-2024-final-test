@@ -11,6 +11,7 @@ val mapstructVersion = "1.6.2"
 val springDocOpenApi = "2.6.0"
 val logginStarterVersion = "0.0.1"
 val exceptionStarterVersion = "0.0.1"
+val wiremockVersion = "3.9.2"
 extra["springCloudVersion"] = "2023.0.3"
 
 tasks.javadoc {
@@ -39,7 +40,9 @@ repositories {
 dependencies {
     implementation("org.zalando:problem-spring-web-starter:0.29.1")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -60,6 +63,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.springframework.security:spring-security-test:6.3.4")
+
+
+    testImplementation("org.wiremock:wiremock-jetty12:3.9.2")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 }

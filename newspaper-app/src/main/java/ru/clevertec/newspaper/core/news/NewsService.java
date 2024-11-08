@@ -118,4 +118,10 @@ public class NewsService {
         return newsMapper.toShortNewsListDto(newsPage.getContent());
     }
 
+    public boolean isAuthor(Long newsId, String username) {
+        News news = newsRepository.findById(newsId)
+            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+        return news.getUsername().equals(username);
+    }
+
 }

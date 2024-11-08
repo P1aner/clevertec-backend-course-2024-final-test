@@ -2,6 +2,7 @@ package ru.clevertec.newspaper.core.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.api.comment.ApiComment;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
@@ -25,6 +26,7 @@ public class CommentController implements ApiComment {
      * @return New comment with id
      */
     @Override
+    @PreAuthorize("hasRole('ADMIN') || (hasRole('SUBSCRIBER') && (newCommentDto.username == authentication.name))")
     public CommentDetailsDto createComment(Long newsId, NewCommentDto newCommentDto) {
         return commentService.createComment(newsId, newCommentDto);
     }
@@ -37,6 +39,7 @@ public class CommentController implements ApiComment {
      * @return Comment with details
      */
     @Override
+    @AdminAndCommentOwnerCanEdit
     public CommentDetailsDto getComment(Long newsId, Long commentId) {
         return commentService.getComment(newsId, commentId);
     }
@@ -50,6 +53,7 @@ public class CommentController implements ApiComment {
      * @return Comment with details
      */
     @Override
+    @AdminAndCommentOwnerCanEdit
     public CommentDetailsDto updateComment(Long newsId, Long commentId, UpdateCommentDto updateCommentDto) {
         return commentService.updateComment(newsId, commentId, updateCommentDto);
     }
@@ -61,6 +65,7 @@ public class CommentController implements ApiComment {
      * @param commentId Comment id
      */
     @Override
+    @AdminAndCommentOwnerCanEdit
     public void deleteComment(Long newsId, Long commentId) {
         commentService.deleteComment(newsId, commentId);
     }
