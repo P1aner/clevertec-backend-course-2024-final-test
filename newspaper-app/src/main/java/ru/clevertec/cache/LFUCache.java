@@ -16,8 +16,8 @@ public class LFUCache<K, V> implements Cache<K, V> {
     private final LinkedHashSet<K> keySet;
 
     public LFUCache(int capacity) {
-        this.map = new HashMap<>(capacity);
-        this.keySet = new LinkedHashSet<>(capacity);
+        this.map = HashMap.newHashMap(capacity);
+        this.keySet = LinkedHashSet.newLinkedHashSet(capacity);
         this.capacity = capacity;
     }
 
