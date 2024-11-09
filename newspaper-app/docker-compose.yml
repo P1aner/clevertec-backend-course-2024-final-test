@@ -19,9 +19,9 @@ services:
       - docker-network
   docker-app:
     ports:
-      - '1000:8080'
+      - '1000:2000'
     build:
-      dockerfile: Dockerfile
+      dockerfile: newspaper-app/Dockerfile
       context: ..
     environment:
       SPRING_PROFILES_ACTIVE: prod

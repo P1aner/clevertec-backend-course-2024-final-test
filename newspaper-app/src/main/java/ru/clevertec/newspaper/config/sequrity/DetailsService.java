@@ -25,7 +25,7 @@ public class DetailsService implements UserDetailsService {
         AppUser userByUsername = userClient.getUserByUsername(username);
 
         Set<GrantedAuthority> authorities = userByUsername.roles().stream()
-            .map((roles) -> new SimpleGrantedAuthority(roles.roleName()))
+            .map(roles -> new SimpleGrantedAuthority(roles.roleName()))
             .collect(Collectors.toSet());
 
         return new User(username, userByUsername.password(), authorities);
