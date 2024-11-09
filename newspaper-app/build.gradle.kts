@@ -13,7 +13,7 @@ configurations {
 }
 
 dependencies {
-    implementation("org.zalando:problem-spring-web-starter:0.29.1")
+    implementation("org.zalando:problem-spring-web-starter:${property("zalandoWebStarterAndViolations")}")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -37,8 +37,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.springframework.security:spring-security-test:6.3.4")
-    testImplementation("org.wiremock:wiremock-jetty12:3.9.2")
-
+    testImplementation("org.springframework.security:spring-security-test:${project.findProperty("springSecurityTest")}")
+    testImplementation("org.wiremock:wiremock-jetty12:${project.findProperty("wiremockJetty12")}")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

@@ -9,6 +9,10 @@ extra["springBootVersion"] = "3.3.5"
 extra["lombokVersion"] = "1.18.34"
 extra["mapstructVersion"] = "1.6.2"
 extra["springDocOpenApi"] = "2.6.0"
+extra["zalandoWebStarterAndViolations"] = "0.29.1"
+extra["zalandoJacksonDataTypeAndProblem"] = "0.27.1"
+extra["wiremockJetty12"] = "3.9.2"
+extra["springSecurityTest"] = "6.3.4"
 
 allprojects {
     repositories {
@@ -26,7 +30,6 @@ subprojects {
         compileOnly("org.projectlombok:lombok:${property("lombokVersion")}")
         annotationProcessor("org.projectlombok:lombok:${property("lombokVersion")}")
     }
-
 
     dependencyManagement {
         imports {

@@ -12,10 +12,10 @@ configurations {
 }
 
 dependencies {
-    implementation("org.zalando:problem-spring-web-starter:0.29.1")
-    implementation("org.zalando:problem-violations:0.29.1")
-    implementation("org.zalando:jackson-datatype-problem:0.27.1")
-    implementation("org.zalando:problem:0.27.1")
+    implementation("org.zalando:problem-spring-web-starter:${property("zalandoWebStarterAndViolations")}")
+    implementation("org.zalando:problem-violations:${property("zalandoWebStarterAndViolations")}")
+    implementation("org.zalando:jackson-datatype-problem:${property("zalandoJacksonDataTypeAndProblem")}")
+    implementation("org.zalando:problem:${property("zalandoJacksonDataTypeAndProblem")}")
     implementation("org.springframework.boot:spring-boot-starter-web:${property("springBootVersion")}")
     implementation("org.springframework.boot:spring-boot-starter:${property("springBootVersion")}")
 }

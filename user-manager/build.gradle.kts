@@ -8,7 +8,7 @@ configurations {
 }
 
 dependencies {
-    implementation("org.zalando:problem-spring-web-starter:0.29.1")
+    implementation("org.zalando:problem-spring-web-starter:${property("zalandoWebStarterAndViolations")}")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
