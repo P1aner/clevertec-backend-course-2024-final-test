@@ -37,9 +37,9 @@ class NewsServiceTest {
     @Test
     @DisplayName("Save news to repository")
     void createNews() {
-        NewNewsDto newNewsDto = NewsDataTest.newNewsDto();
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
-        NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDto();
+        NewNewsDto newNewsDto = NewsData.newNewsDto();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
+        NewsDetailsDto newsDetailsDto = NewsData.newsDetailsDto();
 
         Mockito.when(newsMapper.toNews(newNewsDto)).thenReturn(fullNewsWithoutComments);
         Mockito.when(newsRepository.save(fullNewsWithoutComments)).thenReturn(fullNewsWithoutComments);
@@ -58,8 +58,8 @@ class NewsServiceTest {
     @Test
     @DisplayName("Find news from repository")
     void findNews() {
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
-        NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDto();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
+        NewsDetailsDto newsDetailsDto = NewsData.newsDetailsDto();
 
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(fullNewsWithoutComments));
         Mockito.when(newsMapper.toNewsDto(fullNewsWithoutComments)).thenReturn(newsDetailsDto);
@@ -83,9 +83,9 @@ class NewsServiceTest {
     @Test
     @DisplayName("Update news from repository")
     void updateNews() {
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
-        NewsDetailsDto newsDetailsDto = NewsDataTest.newsDetailsDto();
-        UpdateNewsDto updateNewsDto = NewsDataTest.updateNewsDto();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
+        NewsDetailsDto newsDetailsDto = NewsData.newsDetailsDto();
+        UpdateNewsDto updateNewsDto = NewsData.updateNewsDto();
 
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(fullNewsWithoutComments));
         Mockito.when(newsRepository.save(fullNewsWithoutComments)).thenReturn(fullNewsWithoutComments);
@@ -103,7 +103,7 @@ class NewsServiceTest {
     @Test
     @DisplayName("Update non-existent news from repository")
     void failUpdateNews() {
-        UpdateNewsDto updateNewsDto = NewsDataTest.updateNewsDto();
+        UpdateNewsDto updateNewsDto = NewsData.updateNewsDto();
 
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.empty());
 
@@ -133,8 +133,8 @@ class NewsServiceTest {
     void testFindNewsWithoutQuery() {
         Pageable pageable = Pageable.unpaged();
         String query = "";
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
-        NewsTitleDto newsTitleDto = NewsDataTest.newsTitleDto();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
+        NewsTitleDto newsTitleDto = NewsData.newsTitleDto();
         List<News> newsWithoutComments = List.of(fullNewsWithoutComments);
         Page<News> newsPage = new PageImpl<>(newsWithoutComments);
 
@@ -154,8 +154,8 @@ class NewsServiceTest {
     void testFindNewsWithQuery() {
         Pageable pageable = Pageable.unpaged();
         String query = "Query";
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
-        NewsTitleDto newsTitleDto = NewsDataTest.newsTitleDto();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
+        NewsTitleDto newsTitleDto = NewsData.newsTitleDto();
         List<News> newsWithoutComments = List.of(fullNewsWithoutComments);
         Page<News> newsPage = new PageImpl<>(newsWithoutComments);
 

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentDataTest {
+public class CommentData {
 
     public static final String NEW_COMMENT = """
             {

@@ -1,8 +1,6 @@
 package ru.clevertec.newspaper.core.comment;
 
 
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +22,8 @@ import org.springframework.web.client.RestClient;
 import ru.clevertec.newspaper.PostgresContainerConfiguration;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.core.secure.SecureDataTest;
+import ru.clevertec.newspaper.core.secure.SecuredWireMock;
+import ru.clevertec.newspaper.core.secure.SecureData;
 
 import java.time.LocalDateTime;
 
@@ -37,15 +35,11 @@ import java.time.LocalDateTime;
 class CommentE2ETest extends PostgresContainerConfiguration {
 
     @RegisterExtension
-    static WireMockExtension wm = WireMockExtension.newInstance()
-        .options(WireMockConfiguration.wireMockConfig().port(1000))
-        .build();
+    static WireMockExtension wm = SecuredWireMock.wm;
 
     @BeforeEach
     public void configureWireMock() {
-        wm.stubFor(WireMock.get("/api/users?username=root")
-            .willReturn(WireMock.okJson(SecureDataTest.SECURED_USER_JSON)
-                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)));
+        SecuredWireMock.configureWireMock();
     }
 
     @LocalServerPort
@@ -62,8 +56,8 @@ class CommentE2ETest extends PostgresContainerConfiguration {
             .post()
             .uri(uri)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(CommentDataTest.NEW_COMMENT)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .body(CommentData.NEW_COMMENT)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
         CommentDetailsDto commentDetailsDto = response.getBody();
@@ -76,12 +70,12 @@ class CommentE2ETest extends PostgresContainerConfiguration {
     @Test
     void positiveCaseGetCommentRequest() {
         String uri = "http://localhost:%s/api/news/1/comments/1".formatted(port);
-        CommentDetailsDto commentDetailsDto1 = CommentDataTest.commentDetailsDto();
+        CommentDetailsDto commentDetailsDto1 = CommentData.commentDetailsDto();
 
         ResponseEntity<CommentDetailsDto> response = restClient
             .get()
             .uri(uri)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
         CommentDetailsDto commentDetailsDto = response.getBody();
@@ -97,7 +91,7 @@ class CommentE2ETest extends PostgresContainerConfiguration {
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .get()
             .uri(uri)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
@@ -107,14 +101,14 @@ class CommentE2ETest extends PostgresContainerConfiguration {
     @Test
     void patchCommentRequest() {
         String uri = "http://localhost:%s/api/news/1/comments/1".formatted(port);
-        CommentDetailsDto commentDetailsDto1 = CommentDataTest.commentDetailsDto();
+        CommentDetailsDto commentDetailsDto1 = CommentData.commentDetailsDto();
 
         ResponseEntity<CommentDetailsDto> response = restClient
             .patch()
             .uri(uri)
-            .body(CommentDataTest.UPDATE_COMMENT)
+            .body(CommentData.UPDATE_COMMENT)
             .contentType(MediaType.APPLICATION_JSON)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
         CommentDetailsDto commentDetailsDto = response.getBody();
@@ -130,9 +124,9 @@ class CommentE2ETest extends PostgresContainerConfiguration {
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .patch()
             .uri(uri)
-            .body(CommentDataTest.UPDATE_COMMENT)
+            .body(CommentData.UPDATE_COMMENT)
             .contentType(MediaType.APPLICATION_JSON)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
@@ -146,7 +140,7 @@ class CommentE2ETest extends PostgresContainerConfiguration {
         ResponseEntity<CommentDetailsDto> response = restClient
             .delete()
             .uri(uri)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
 
@@ -166,7 +160,7 @@ class CommentE2ETest extends PostgresContainerConfiguration {
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .get()
             .uri(uri)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()));
 
         Assertions.assertEquals(HttpStatus.NO_CONTENT, entity.getStatusCode());
@@ -181,13 +175,13 @@ class CommentE2ETest extends PostgresContainerConfiguration {
 
     @Test
     void findCommentByNews() {
-        NewsDetailsDto newsDetailsDto = CommentDataTest.newsDetailsDto();
+        NewsDetailsDto newsDetailsDto = CommentData.newsDetailsDto();
         String uri = "http://localhost:%s/api/news/1/comments".formatted(port);
 
         ResponseEntity<NewsDetailsDto> entity = restClient
             .get()
             .uri(uri)
-            .header(SecureDataTest.AUTHORIZATION, SecureDataTest.BASIC)
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(NewsDetailsDto.class);
         NewsDetailsDto body = entity.getBody();

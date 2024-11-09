@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import ru.clevertec.newspaper.PostgresContainerConfiguration;
 import ru.clevertec.newspaper.core.comment.Comment;
-import ru.clevertec.newspaper.core.comment.CommentDataTest;
+import ru.clevertec.newspaper.core.comment.CommentData;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,21 +36,21 @@ class NewsRepositoryTest extends PostgresContainerConfiguration {
 
     @Test
     void findAll() {
-        newsRepository.save(NewsDataTest.fullNewsWithoutCommentsAndId());
+        newsRepository.save(NewsData.fullNewsWithoutCommentsAndId());
         List<News> all = newsRepository.findAll();
         Assertions.assertEquals(2, all.size());
     }
 
     @Test
     void saveNews() {
-        News save = newsRepository.save(NewsDataTest.fullNewsWithoutCommentsAndId());
+        News save = newsRepository.save(NewsData.fullNewsWithoutCommentsAndId());
         Assertions.assertEquals(2L, save.getId());
     }
 
     @Test
     void saveNewsAndComment() {
-        News entity = NewsDataTest.fullNewsWithoutCommentsAndId();
-        Comment comment = CommentDataTest.fullCommentWithoutNewsAndId();
+        News entity = NewsData.fullNewsWithoutCommentsAndId();
+        Comment comment = CommentData.fullCommentWithoutNewsAndId();
 
         entity.getCommentList().add(comment);
         comment.setNews(entity);

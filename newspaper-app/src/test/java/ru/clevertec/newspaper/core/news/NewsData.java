@@ -4,13 +4,13 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
-import ru.clevertec.newspaper.core.comment.CommentDataTest;
+import ru.clevertec.newspaper.core.comment.CommentData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsDataTest {
+public class NewsData {
 
     private static final LocalDateTime LOCAL_DATE_TIME = LocalDateTime.of(2024, 12, 12, 12, 12);
 
@@ -67,7 +67,7 @@ public class NewsDataTest {
     }
 
     public static NewsDetailsDto newsDetailsDto() {
-        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "user", "Title", "Text", List.of(CommentDataTest.commentDetailsDto()));
+        return new NewsDetailsDto(1L, LOCAL_DATE_TIME, "user", "Title", "Text", List.of(CommentData.commentDetailsDto()));
     }
 
     public static UpdateNewsDto updateNewsDto() {

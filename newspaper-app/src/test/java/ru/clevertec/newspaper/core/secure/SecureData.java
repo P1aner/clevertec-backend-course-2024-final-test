@@ -1,9 +1,9 @@
 package ru.clevertec.newspaper.core.secure;
 
-public class SecureDataTest {
+public class SecureData {
     public static final String AUTHORIZATION = "Authorization";
     public static final String BASIC = "Basic cm9vdDpyb290";
-    public final static String SECURED_USER_JSON = """
+    public static final String SECURED_USER_JSON = """
         {
             "id": 1,
             "username": "root",

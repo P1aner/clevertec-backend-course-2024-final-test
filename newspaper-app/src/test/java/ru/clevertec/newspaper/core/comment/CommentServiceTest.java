@@ -17,7 +17,7 @@ import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.core.news.News;
-import ru.clevertec.newspaper.core.news.NewsDataTest;
+import ru.clevertec.newspaper.core.news.NewsData;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
 
@@ -45,11 +45,11 @@ class CommentServiceTest {
     @Test
     @DisplayName("Assigning news to a comment and saving it")
     void createComment() {
-        NewCommentDto newCommentDto = CommentDataTest.newCommentDto();
-        Comment fullCommentWithoutNewsAndId = CommentDataTest.fullCommentWithoutNewsAndId();
-        News fullNewsWithoutComments = CommentDataTest.fullNewsWithoutComments();
-        Comment fullComment = CommentDataTest.fullComment();
-        CommentDetailsDto commentDetailsDto = CommentDataTest.commentDetailsDto();
+        NewCommentDto newCommentDto = CommentData.newCommentDto();
+        Comment fullCommentWithoutNewsAndId = CommentData.fullCommentWithoutNewsAndId();
+        News fullNewsWithoutComments = CommentData.fullNewsWithoutComments();
+        Comment fullComment = CommentData.fullComment();
+        CommentDetailsDto commentDetailsDto = CommentData.commentDetailsDto();
 
         Mockito.when(commentMapper.toComment(newCommentDto)).thenReturn(fullCommentWithoutNewsAndId);
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(fullNewsWithoutComments));
@@ -70,8 +70,8 @@ class CommentServiceTest {
     @Test
     @DisplayName("Fail to save comment")
     void createCommentFail() {
-        NewCommentDto newCommentDto = CommentDataTest.newCommentDto();
-        Comment fullCommentWithoutNewsAndId = CommentDataTest.fullCommentWithoutNewsAndId();
+        NewCommentDto newCommentDto = CommentData.newCommentDto();
+        Comment fullCommentWithoutNewsAndId = CommentData.fullCommentWithoutNewsAndId();
 
         Mockito.when(commentMapper.toComment(newCommentDto)).thenReturn(fullCommentWithoutNewsAndId);
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.empty());
@@ -82,8 +82,8 @@ class CommentServiceTest {
     @Test
     @DisplayName("Successful find comment")
     void getComment() {
-        Comment fullComment = CommentDataTest.fullComment();
-        CommentDetailsDto commentDetailsDto = CommentDataTest.commentDetailsDto();
+        Comment fullComment = CommentData.fullComment();
+        CommentDetailsDto commentDetailsDto = CommentData.commentDetailsDto();
 
         Mockito.when(commentRepository.findByNews_IdAndId(1L, 1L)).thenReturn(Optional.ofNullable(fullComment));
         Mockito.when(commentMapper.toCommentDto(fullComment)).thenReturn(commentDetailsDto);
@@ -106,9 +106,9 @@ class CommentServiceTest {
     @Test
     @DisplayName("Successful comment update")
     void updateComment() {
-        UpdateCommentDto updateCommentDto = CommentDataTest.updateCommentDto();
-        Comment comment = CommentDataTest.fullCommentWithoutNews();
-        CommentDetailsDto commentDetailsDto = CommentDataTest.commentDetailsDto();
+        UpdateCommentDto updateCommentDto = CommentData.updateCommentDto();
+        Comment comment = CommentData.fullCommentWithoutNews();
+        CommentDetailsDto commentDetailsDto = CommentData.commentDetailsDto();
 
         Mockito.when(commentRepository.findByNews_IdAndId(1L, 1L)).thenReturn(Optional.of(comment));
         Mockito.when(commentRepository.save(comment)).thenReturn(comment);
@@ -124,7 +124,7 @@ class CommentServiceTest {
     @Test
     @DisplayName("Fail comment update")
     void failUpdateComment() {
-        UpdateCommentDto updateCommentDto = CommentDataTest.updateCommentDto();
+        UpdateCommentDto updateCommentDto = CommentData.updateCommentDto();
 
         Mockito.when(commentRepository.findByNews_IdAndId(1L, 1L)).thenReturn(Optional.empty());
 
@@ -134,7 +134,7 @@ class CommentServiceTest {
     @Test
     @DisplayName("Successful comment delete")
     void deleteComment() {
-        News fullNewsWithoutComments = NewsDataTest.fullNewsWithoutComments();
+        News fullNewsWithoutComments = NewsData.fullNewsWithoutComments();
 
         Mockito.when(commentRepository.existsByNews_IdAndId(1L, 1L)).thenReturn(true);
         Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.ofNullable(fullNewsWithoutComments));
@@ -147,7 +147,7 @@ class CommentServiceTest {
     @Test
     @DisplayName("Fail comment delete")
     void failDeleteComment() {
-        Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(NewsDataTest.fullNewsWithoutComments()));
+        Mockito.when(newsRepository.findById(1L)).thenReturn(Optional.of(NewsData.fullNewsWithoutComments()));
         Mockito.when(commentRepository.existsByNews_IdAndId(1L, 1L)).thenReturn(false);
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> commentService.deleteComment(1L, 1L));
@@ -156,9 +156,9 @@ class CommentServiceTest {
     @Test
     @DisplayName("Find new's comments without query")
     void findCommentByNewsWithQuery() {
-        Comment fullComment = CommentDataTest.fullComment();
+        Comment fullComment = CommentData.fullComment();
         Page<Comment> comments = new PageImpl<>(List.of(fullComment));
-        News fullNewsWithoutComments = CommentDataTest.fullNewsWithoutComments();
+        News fullNewsWithoutComments = CommentData.fullNewsWithoutComments();
         Pageable pageable = Pageable.unpaged();
         String text = "query";
 
@@ -176,9 +176,9 @@ class CommentServiceTest {
     @Test
     @DisplayName("Find new's comments without query")
     void findCommentByNewsWithoutQuery() {
-        Comment fullComment = CommentDataTest.fullComment();
+        Comment fullComment = CommentData.fullComment();
         Page<Comment> comments = new PageImpl<>(List.of(fullComment));
-        News fullNewsWithoutComments = CommentDataTest.fullNewsWithoutComments();
+        News fullNewsWithoutComments = CommentData.fullNewsWithoutComments();
         Pageable pageable = Pageable.unpaged();
         String text = "";
 
