@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 
-include("loggin-starter")
+include("log-starter")
 include("exception-starter")
 include("cloud-config")
 include("newspaper-app")

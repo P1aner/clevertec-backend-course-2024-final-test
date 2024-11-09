@@ -1,4 +1,4 @@
-package ru.clevertec.user_manager.core;
+package ru.clevertec.user_manager.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

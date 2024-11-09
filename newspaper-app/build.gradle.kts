@@ -26,7 +26,7 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("com.h2database:h2")
 
-    implementation("ru.clevertec:loggin-starter:${project.findProperty("loggingStarterVersion")}")
+    implementation("ru.clevertec:log-starter:${project.findProperty("logStarterVersion")}")
     implementation("ru.clevertec:exception-starter:${project.findProperty("exceptionStarterVersion")}")
 
     runtimeOnly("org.postgresql:postgresql")

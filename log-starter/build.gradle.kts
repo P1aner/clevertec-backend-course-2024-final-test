@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "ru.clevertec"
-version = project.findProperty("loggingStarterVersion") as String
+version = project.findProperty("logStarterVersion") as String
 
 configurations {
     compileOnly {
