@@ -1,28 +1,9 @@
-plugins {
-    java
-    id("org.springframework.boot") version "3.3.4"
-    id("io.spring.dependency-management") version "1.1.6"
-}
-
 group = "ru.clevertec"
 version = "0.0.1"
-
-val mapstructVersion = "1.6.2"
-val springDocOpenApi = "2.6.0"
-val logginStarterVersion = "0.0.1"
-val exceptionStarterVersion = "0.0.1"
-val wiremockVersion = "3.9.2"
-extra["springCloudVersion"] = "2023.0.3"
 
 tasks.javadoc {
     setDestinationDir(file("build/docs/javadoс"))
     include("ru/clevertec/**")
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
 }
 
 configurations {
@@ -31,53 +12,33 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-    gradlePluginPortal()
-    mavenLocal()
-}
-
 dependencies {
     implementation("org.zalando:problem-spring-web-starter:0.29.1")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.mapstruct:mapstruct:$mapstructVersion")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApi")
+    implementation("org.mapstruct:mapstruct:${project.findProperty("mapstructVersion")}")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${project.findProperty("springDocOpenApi")}")
     implementation("org.liquibase:liquibase-core")
     implementation("com.h2database:h2")
 
-    implementation("ru.clevertec:loggin-starter:${logginStarterVersion}")
-    implementation("ru.clevertec:exception-starter:${exceptionStarterVersion}")
+    implementation("ru.clevertec:loggin-starter:${project.findProperty("loggingStarterVersion")}")
+    implementation("ru.clevertec:exception-starter:${project.findProperty("exceptionStarterVersion")}")
 
-    compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+
+    annotationProcessor("org.mapstruct:mapstruct-processor:${project.findProperty("mapstructVersion")}")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.springframework.security:spring-security-test:6.3.4")
-
-
     testImplementation("org.wiremock:wiremock-jetty12:3.9.2")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-}
-
-dependencyManagement {
-    imports {
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
