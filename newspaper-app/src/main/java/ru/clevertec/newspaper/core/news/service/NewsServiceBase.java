@@ -26,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewsServiceBase implements NewsService {
 
+    private static final String NEWS = "News";
     private final NewsRepository newsRepository;
     private final NewsMapper newsMapper;
     private final Cache<String, Object> cache;
@@ -61,7 +62,7 @@ public class NewsServiceBase implements NewsService {
             .map(m -> (News) m)
             .orElseGet(() -> {
                 News news = newsRepository.findById(newsId)
-                    .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+                    .orElseThrow(() -> ProblemUtil.resourceNotFound(NEWS, newsId));
                 cache.put(key, news);
                 return news;
             }));
@@ -78,7 +79,7 @@ public class NewsServiceBase implements NewsService {
     @Override
     public NewsDetailsDto updateNews(Long newsId, UpdateNewsDto updateNewsDto) {
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound(NEWS, newsId));
         newsMapper.updateNewsFromDto(updateNewsDto, news);
         News save = newsRepository.save(news);
 
@@ -97,7 +98,7 @@ public class NewsServiceBase implements NewsService {
     @Override
     public void deleteNews(Long newsId) {
         if (!newsRepository.existsById(newsId)) {
-            throw ProblemUtil.newsNotFound(newsId);
+            throw ProblemUtil.resourceNotFound(NEWS, newsId);
         }
         newsRepository.deleteById(newsId);
 
@@ -136,7 +137,7 @@ public class NewsServiceBase implements NewsService {
     @Override
     public boolean isAuthor(Long newsId, String username) {
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound(NEWS, newsId));
         return news.getUsername().equals(username);
     }
 

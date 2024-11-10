@@ -8,16 +8,9 @@ public class ProblemUtil {
     private ProblemUtil() {
     }
 
-    public static ResourceNotFoundException newsNotFound(Long id) {
-        String format = "News id: %s not found.".formatted(id);
+    public static ResourceNotFoundException resourceNotFound(String resourceName, Long id) {
+        String format = "%s id: %s not found.".formatted(resourceName, id);
         log.warn(format);
         return new ResourceNotFoundException(format);
     }
-
-    public static ResourceNotFoundException commentNotFound(Long id) {
-        String format = "Comment id: %s not found.".formatted(id);
-        log.warn(format);
-        return new ResourceNotFoundException(format);
-    }
-
 }

@@ -29,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentServiceBase implements CommentService {
 
+    private static final String COMMENT = "Comment";
     private final CommentRepository commentRepository;
     private final NewsRepository newsRepository;
     private final CommentMapper commentMapper;
@@ -47,7 +48,7 @@ public class CommentServiceBase implements CommentService {
     public CommentDetailsDto createComment(Long newsId, NewCommentDto newCommentDto) {
         Comment comment = commentMapper.toComment(newCommentDto);
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound("News", newsId));
         comment.setNews(news);
         Comment save = commentRepository.save(comment);
 
@@ -72,7 +73,7 @@ public class CommentServiceBase implements CommentService {
             .map(m -> (Comment) m)
             .orElseGet(() -> {
                 Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-                    .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
+                    .orElseThrow(() -> ProblemUtil.resourceNotFound(COMMENT, commentId));
                 cache.put(key, comment);
                 return comment;
             }));
@@ -90,7 +91,7 @@ public class CommentServiceBase implements CommentService {
     @Override
     public CommentDetailsDto updateComment(Long newsId, Long commentId, UpdateCommentDto updateCommentDto) {
         Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
-            .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound(COMMENT, commentId));
         commentMapper.updateCommentFromDto(updateCommentDto, comment);
         Comment save = commentRepository.save(comment);
 
@@ -110,9 +111,9 @@ public class CommentServiceBase implements CommentService {
     @Override
     public void deleteComment(Long newsId, Long commentId) {
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound("News", newsId));
         if (!commentRepository.existsByNews_IdAndId(newsId, commentId)) {
-            throw ProblemUtil.commentNotFound(commentId);
+            throw ProblemUtil.resourceNotFound(COMMENT, commentId);
         }
         news.getCommentList().removeIf(i -> i.getId().equals(commentId));
 
@@ -138,7 +139,7 @@ public class CommentServiceBase implements CommentService {
     @Override
     public NewsDetailsDto findCommentByNews(Long newsId, String query, Pageable pageable) {
         News news = newsRepository.findById(newsId)
-            .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
+            .orElseThrow(() -> ProblemUtil.resourceNotFound("News", newsId));
         Page<Comment> comments;
         if (StringUtils.isEmpty(query)) {
             log.debug("Query is empty");
