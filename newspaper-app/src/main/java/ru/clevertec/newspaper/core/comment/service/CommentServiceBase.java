@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.core.comment;
+package ru.clevertec.newspaper.core.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,14 +7,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.clevertec.cache.Cache;
+import ru.clevertec.exception.exception.ProblemUtil;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
+import ru.clevertec.newspaper.core.comment.Comment;
+import ru.clevertec.newspaper.core.comment.CommentMapper;
+import ru.clevertec.newspaper.core.comment.CommentRepository;
 import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
-import ru.clevertec.exception.exception.ProblemUtil;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CommentService {
+public class CommentServiceBase implements CommentService {
 
     private final CommentRepository commentRepository;
     private final NewsRepository newsRepository;
@@ -40,6 +43,7 @@ public class CommentService {
      * @param newCommentDto New comment without id
      * @return New comment with id
      */
+    @Override
     public CommentDetailsDto createComment(Long newsId, NewCommentDto newCommentDto) {
         Comment comment = commentMapper.toComment(newCommentDto);
         News news = newsRepository.findById(newsId)
@@ -61,6 +65,7 @@ public class CommentService {
      * @param commentId Comment id
      * @return Comment with details
      */
+    @Override
     public CommentDetailsDto getComment(Long newsId, Long commentId) {
         String key = cache.generateKey(Comment.class, commentId, newsId);
         return commentMapper.toCommentDto(cache.get(key)
@@ -82,6 +87,7 @@ public class CommentService {
      * @param updateCommentDto Updated comment without id
      * @return Comment with details
      */
+    @Override
     public CommentDetailsDto updateComment(Long newsId, Long commentId, UpdateCommentDto updateCommentDto) {
         Comment comment = commentRepository.findByNews_IdAndId(newsId, commentId)
             .orElseThrow(() -> ProblemUtil.commentNotFound(commentId));
@@ -101,6 +107,7 @@ public class CommentService {
      * @param newsId    News id
      * @param commentId Comment id
      */
+    @Override
     public void deleteComment(Long newsId, Long commentId) {
         News news = newsRepository.findById(newsId)
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
@@ -128,6 +135,7 @@ public class CommentService {
      * @param pageable Settings of page.
      * @return The news article and its comment pages.
      */
+    @Override
     public NewsDetailsDto findCommentByNews(Long newsId, String query, Pageable pageable) {
         News news = newsRepository.findById(newsId)
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));

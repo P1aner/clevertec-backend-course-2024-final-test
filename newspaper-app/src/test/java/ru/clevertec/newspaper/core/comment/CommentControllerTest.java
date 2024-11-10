@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.config.sequrity.SecurityConfig;
+import ru.clevertec.newspaper.core.comment.controller.CommentController;
+import ru.clevertec.newspaper.core.comment.service.CommentServiceBase;
 import ru.clevertec.newspaper.core.secure.SecureData;
 
 @WebMvcTest({CommentController.class})
@@ -30,7 +32,7 @@ class CommentControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CommentService commentService;
+    private CommentServiceBase commentService;
 
     @Test
     @WithMockUser(username = "root", roles = "ADMIN")

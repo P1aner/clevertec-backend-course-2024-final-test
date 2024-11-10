@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.user_manager.api.UserApi;
 import ru.clevertec.user_manager.api.dto.AppUserDto;
+import ru.clevertec.user_manager.core.service.UserService;
 
 @RestController
 @RequiredArgsConstructor

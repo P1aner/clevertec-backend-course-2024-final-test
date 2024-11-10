@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.core.comment;
+package ru.clevertec.newspaper.core.news.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasRole('ADMIN') || (hasRole('SUBSCRIBER') && @commentService.isAuthor(#newsId, #commentId, authentication.name))")
-public @interface AdminAndCommentOwnerCanEdit {
+@PreAuthorize("hasRole('ADMIN') || (hasRole('JOURNALIST') && @newsService.isAuthor(#newsId, authentication.name))")
+public @interface AdminAndNewsOwnerCanEdit {
 }

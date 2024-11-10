@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.config.sequrity.SecurityConfig;
+import ru.clevertec.newspaper.core.news.controller.NewsController;
+import ru.clevertec.newspaper.core.news.service.NewsServiceBase;
 import ru.clevertec.newspaper.core.secure.SecureData;
 
 import java.util.List;
@@ -32,7 +34,7 @@ class NewsControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private NewsService newsService;
+    private NewsServiceBase newsService;
 
     @Test
     @WithMockUser(username = "root", roles = "ADMIN")

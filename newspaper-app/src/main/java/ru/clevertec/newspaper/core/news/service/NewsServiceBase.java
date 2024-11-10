@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.core.news;
+package ru.clevertec.newspaper.core.news.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,9 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
+import ru.clevertec.newspaper.core.news.News;
+import ru.clevertec.newspaper.core.news.NewsMapper;
+import ru.clevertec.newspaper.core.news.NewsRepository;
 
 import java.util.List;
 
@@ -21,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NewsService {
+public class NewsServiceBase implements NewsService {
 
     private final NewsRepository newsRepository;
     private final NewsMapper newsMapper;
@@ -33,6 +36,7 @@ public class NewsService {
      * @param newNewsDto News without id
      * @return News with details
      */
+    @Override
     public NewsDetailsDto createNews(NewNewsDto newNewsDto) {
         News news = newsMapper.toNews(newNewsDto);
         News save = newsRepository.save(news);
@@ -50,6 +54,7 @@ public class NewsService {
      * @param newsId News id
      * @return News with details
      */
+    @Override
     public NewsDetailsDto findNews(Long newsId) {
         String key = cache.generateKey(News.class, newsId);
         return newsMapper.toNewsDto(cache.get(key)
@@ -70,6 +75,7 @@ public class NewsService {
      * @param updateNewsDto News without id
      * @return News with details
      */
+    @Override
     public NewsDetailsDto updateNews(Long newsId, UpdateNewsDto updateNewsDto) {
         News news = newsRepository.findById(newsId)
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));
@@ -88,6 +94,7 @@ public class NewsService {
      *
      * @param newsId News id
      */
+    @Override
     public void deleteNews(Long newsId) {
         if (!newsRepository.existsById(newsId)) {
             throw ProblemUtil.newsNotFound(newsId);
@@ -106,6 +113,7 @@ public class NewsService {
      * @param pageable Settings of page
      * @return News list
      */
+    @Override
     public List<NewsTitleDto> findNews(String query, Pageable pageable) {
         Page<News> newsPage;
         if (StringUtils.isEmpty(query)) {
@@ -118,6 +126,14 @@ public class NewsService {
         return newsMapper.toShortNewsListDto(newsPage.getContent());
     }
 
+    /**
+     * This method check "is user news owner".
+     *
+     * @param newsId   News id
+     * @param username Username of user
+     * @return Logical answer
+     */
+    @Override
     public boolean isAuthor(Long newsId, String username) {
         News news = newsRepository.findById(newsId)
             .orElseThrow(() -> ProblemUtil.newsNotFound(newsId));

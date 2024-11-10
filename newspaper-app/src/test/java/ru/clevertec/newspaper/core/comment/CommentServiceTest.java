@@ -16,6 +16,7 @@ import ru.clevertec.exception.exception.ResourceNotFoundException;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
+import ru.clevertec.newspaper.core.comment.service.CommentServiceBase;
 import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsData;
 import ru.clevertec.newspaper.core.news.NewsMapper;
@@ -39,7 +40,7 @@ class CommentServiceTest {
     private Cache<String, Object> cache;
 
     @InjectMocks
-    private CommentService commentService;
+    private CommentServiceBase commentService;
 
 
     @Test

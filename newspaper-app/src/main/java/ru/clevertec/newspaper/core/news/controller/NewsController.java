@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.core.news;
+package ru.clevertec.newspaper.core.news.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +9,7 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
+import ru.clevertec.newspaper.core.news.service.NewsService;
 
 import java.util.List;
 

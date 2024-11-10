@@ -17,6 +17,7 @@ import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
+import ru.clevertec.newspaper.core.news.service.NewsServiceBase;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ class NewsServiceTest {
     private Cache<String, Object> cache;
 
     @InjectMocks
-    private NewsService newsService;
+    private NewsServiceBase newsService;
 
     @Test
     @DisplayName("Save news to repository")

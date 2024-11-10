@@ -1,4 +1,4 @@
-package ru.clevertec.newspaper.core.comment;
+package ru.clevertec.newspaper.core.comment.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +9,7 @@ import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
 import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
 import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
+import ru.clevertec.newspaper.core.comment.service.CommentService;
 
 /**
  * Provides tools for working with news comments
