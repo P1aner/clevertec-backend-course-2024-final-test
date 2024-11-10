@@ -145,7 +145,7 @@ public class CommentServiceBase implements CommentService {
             log.debug("Query is empty");
             comments = commentRepository.findByNews_Id(newsId, pageable);
         } else {
-            log.debug("Query is not empty");
+            log.debug("Query is not empty and contains: {}", query);
             comments = commentRepository.findByTextContainsIgnoreCaseAndNews_Id(query, newsId, pageable);
         }
         List<Comment> content = comments.getContent();

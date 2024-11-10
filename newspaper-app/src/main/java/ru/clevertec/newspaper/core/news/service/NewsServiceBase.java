@@ -118,10 +118,10 @@ public class NewsServiceBase implements NewsService {
     public List<NewsTitleDto> findNews(String query, Pageable pageable) {
         Page<News> newsPage;
         if (StringUtils.isEmpty(query)) {
-            log.debug("Query is not empty");
+            log.debug("Query is empty");
             newsPage = newsRepository.findAll(pageable);
         } else {
-            log.debug("Query is empty");
+            log.debug("Query is not empty and contains: {}", query);
             newsPage = newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
         }
         return newsMapper.toShortNewsListDto(newsPage.getContent());
