@@ -16,6 +16,7 @@ import ru.clevertec.exception.exception.ResourceNotFoundException;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDtoList;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
 import ru.clevertec.newspaper.core.news.service.NewsServiceBase;
 
@@ -142,12 +143,12 @@ class NewsServiceTest {
         Mockito.when(newsRepository.findAll(pageable)).thenReturn(newsPage);
         Mockito.when(newsMapper.toShortNewsListDto(newsWithoutComments)).thenReturn(List.of(newsTitleDto));
 
-        List<NewsTitleDto> news = newsService.findNews(query, pageable);
+        NewsTitleDtoList news = newsService.findNews(query, pageable);
 
         Mockito.verify(newsRepository, Mockito.times(1)).findAll(pageable);
         Mockito.verify(newsRepository, Mockito.times(0)).findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
 
-        Assertions.assertEquals(news.getFirst(), newsTitleDto);
+        Assertions.assertEquals(news.getNewsListList().getFirst(), newsTitleDto);
     }
 
     @Test
@@ -163,11 +164,11 @@ class NewsServiceTest {
         Mockito.when(newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable)).thenReturn(newsPage);
         Mockito.when(newsMapper.toShortNewsListDto(newsWithoutComments)).thenReturn(List.of(newsTitleDto));
 
-        List<NewsTitleDto> news = newsService.findNews(query, pageable);
+        NewsTitleDtoList news = newsService.findNews(query, pageable);
 
         Mockito.verify(newsRepository, Mockito.times(0)).findAll(pageable);
         Mockito.verify(newsRepository, Mockito.times(1)).findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
 
-        Assertions.assertEquals(news.getFirst(), newsTitleDto);
+        Assertions.assertEquals(news.getNewsListList().getFirst(), newsTitleDto);
     }
 }

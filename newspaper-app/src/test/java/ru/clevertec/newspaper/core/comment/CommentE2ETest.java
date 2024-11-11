@@ -14,6 +14,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -21,11 +22,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import ru.clevertec.newspaper.PostgresContainerConfiguration;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
+import ru.clevertec.newspaper.api.comment.dto.NewCommentDto;
+import ru.clevertec.newspaper.api.comment.dto.UpdateCommentDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.core.secure.SecuredWireMock;
 import ru.clevertec.newspaper.core.secure.SecureData;
-
-import java.time.LocalDateTime;
+import ru.clevertec.newspaper.core.secure.SecuredWireMock;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -45,18 +46,28 @@ class CommentE2ETest extends PostgresContainerConfiguration {
     @LocalServerPort
     private int port;
 
-    private final RestClient restClient = RestClient.create();
+    private final RestClient restClient = RestClient.builder()
+        .messageConverters(converters -> converters.add(new ProtobufHttpMessageConverter()))
+        .defaultHeader("Accept", "application/x-protobuf")
+        .defaultHeader("Content-Type", "application/x-protobuf")
+        .build();
 
     @Test
     void positiveCasePostCommentRequest() {
         String uri = "http://localhost:%s/api/news/1/comments".formatted(port);
-        CommentDetailsDto commentDetailsDto1 = new CommentDetailsDto(2L, LocalDateTime.of(2024, 12, 12, 12, 12), "Text", "username");
+        CommentDetailsDto commentDetailsDto1 = CommentDetailsDto.newBuilder()
+            .setId(2L)
+            .setTimestamp("2024-12-12T12:12:00")
+            .setText("Text")
+            .setUsername("username")
+            .build();
+        NewCommentDto newCommentDto = CommentData.newCommentDto();
 
         ResponseEntity<CommentDetailsDto> response = restClient
             .post()
             .uri(uri)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(CommentData.NEW_COMMENT)
+            .contentType(MediaType.APPLICATION_PROTOBUF)
+            .body(newCommentDto)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
@@ -79,7 +90,6 @@ class CommentE2ETest extends PostgresContainerConfiguration {
             .retrieve()
             .toEntity(CommentDetailsDto.class);
         CommentDetailsDto commentDetailsDto = response.getBody();
-
         Assertions.assertEquals(commentDetailsDto, commentDetailsDto1);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -92,6 +102,8 @@ class CommentE2ETest extends PostgresContainerConfiguration {
             .get()
             .uri(uri)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
+            .header("Accept", "application/x-protobuf")
+            .header("Content-Type", "application/x-protobuf")
             .retrieve()));
 
         Assertions.assertTrue(httpClientErrorException.getMessage().contains("Comment id: 1 not found."));
@@ -102,12 +114,12 @@ class CommentE2ETest extends PostgresContainerConfiguration {
     void patchCommentRequest() {
         String uri = "http://localhost:%s/api/news/1/comments/1".formatted(port);
         CommentDetailsDto commentDetailsDto1 = CommentData.commentDetailsDto();
+        UpdateCommentDto updateCommentDto = CommentData.updateCommentDto();
 
         ResponseEntity<CommentDetailsDto> response = restClient
             .patch()
             .uri(uri)
-            .body(CommentData.UPDATE_COMMENT)
-            .contentType(MediaType.APPLICATION_JSON)
+            .body(updateCommentDto)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
@@ -120,12 +132,13 @@ class CommentE2ETest extends PostgresContainerConfiguration {
     @Test
     void negativeCasePatchCommentRequest() {
         String uri = "http://localhost:%s/api/news/2/comments/1".formatted(port);
+        UpdateCommentDto updateCommentDto = CommentData.updateCommentDto();
 
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient
             .patch()
             .uri(uri)
-            .body(CommentData.UPDATE_COMMENT)
-            .contentType(MediaType.APPLICATION_JSON)
+            .body(updateCommentDto)
+            .contentType(MediaType.APPLICATION_PROTOBUF)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()));
 
@@ -154,7 +167,7 @@ class CommentE2ETest extends PostgresContainerConfiguration {
         ResponseEntity<CommentDetailsDto> entity = restClient
             .delete()
             .uri(uri)
-            .header("Authorization", "Basic cm9vdDpyb290")
+            .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
         HttpClientErrorException httpClientErrorException = Assert.assertThrows(HttpClientErrorException.class, getThrowingRunnable(restClient

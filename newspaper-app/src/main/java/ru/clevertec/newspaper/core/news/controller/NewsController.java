@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.api.news.NewsApi;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDtoList;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
 import ru.clevertec.newspaper.core.news.service.NewsService;
-
-import java.util.List;
 
 /**
  * Provides tools for working with the news
@@ -77,7 +75,7 @@ public class NewsController implements NewsApi {
      * @return News list
      */
     @Override
-    public List<NewsTitleDto> findNews(String query, Pageable pageable) {
+    public NewsTitleDtoList findNews(String query, Pageable pageable) {
         return newsService.findNews(query, pageable);
     }
 

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package ru.clevertec.newspaper.api.comment.dto;
+
+option java_multiple_files = true;
+
+
+message CommentDetailsDto {
+  int64 id = 1;
+  string timestamp = 2;
+  string text = 3;
+  string username = 4;
+}
+
+message NewCommentDto {
+  string timestamp = 1;
+  string text = 2;
+  string username = 3;
+}
+
+message UpdateCommentDto {
+  string timestamp = 1;
+  string text = 2;
+  string username = 3;
+}

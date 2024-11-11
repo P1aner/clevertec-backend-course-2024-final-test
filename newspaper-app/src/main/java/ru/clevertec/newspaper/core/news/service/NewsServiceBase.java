@@ -10,13 +10,11 @@ import ru.clevertec.cache.Cache;
 import ru.clevertec.exception.exception.ProblemUtil;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDtoList;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
 import ru.clevertec.newspaper.core.news.News;
 import ru.clevertec.newspaper.core.news.NewsMapper;
 import ru.clevertec.newspaper.core.news.NewsRepository;
-
-import java.util.List;
 
 /**
  * Provides tools for working with the news
@@ -115,7 +113,7 @@ public class NewsServiceBase implements NewsService {
      * @return News list
      */
     @Override
-    public List<NewsTitleDto> findNews(String query, Pageable pageable) {
+    public NewsTitleDtoList findNews(String query, Pageable pageable) {
         Page<News> newsPage;
         if (StringUtils.isEmpty(query)) {
             log.debug("Query is empty");
@@ -124,7 +122,9 @@ public class NewsServiceBase implements NewsService {
             log.debug("Query is not empty and contains: {}", query);
             newsPage = newsRepository.findByTitleContainsIgnoreCaseAndTextContainsIgnoreCase(query, query, pageable);
         }
-        return newsMapper.toShortNewsListDto(newsPage.getContent());
+        return NewsTitleDtoList.newBuilder()
+            .addAllNewsList(newsMapper.toShortNewsListDto(newsPage.getContent()))
+            .build();
     }
 
     /**

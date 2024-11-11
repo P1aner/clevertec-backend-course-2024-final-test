@@ -22,10 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDtoList;
 import ru.clevertec.newspaper.api.news.dto.UpdateNewsDto;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/news")
@@ -33,13 +31,13 @@ import java.util.List;
 @Tag(name = "news", description = "News operation")
 public interface NewsApi {
 
-    @PostMapping
+    @PostMapping(consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create news", description = "This POST method takes a json as input and creates an object in the database")
     @ApiResponse(responseCode = "201", description = "Successful operation. Object created.")
     NewsDetailsDto createNews(@RequestBody NewNewsDto fullNewsDto);
 
-    @GetMapping("{newsId}")
+    @GetMapping(value = "{newsId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get news", description = "This GET method show a news")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
@@ -48,7 +46,7 @@ public interface NewsApi {
                                example = "1",
                                required = true) Long newsId);
 
-    @PatchMapping("{newsId}")
+    @PatchMapping(value = "{newsId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update news", description = "This PATCH method update a news")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
@@ -58,7 +56,7 @@ public interface NewsApi {
                                   required = true) Long newsId,
                               @RequestBody UpdateNewsDto updateNewsDto);
 
-    @DeleteMapping("{newsId}")
+    @DeleteMapping(value = "{newsId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete news", description = "This DELETE method deleted a news")
     @ApiResponse(responseCode = "204", description = "Successful operation.")
@@ -67,12 +65,12 @@ public interface NewsApi {
                         example = "1",
                         required = true) Long newsId);
 
-    @GetMapping
+    @GetMapping(consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find news", description = "This GET method find all news or show news containing query text")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
-    List<NewsTitleDto> findNews(@RequestParam(required = false)
-                                @Parameter(description = "Search condition",
-                                    example = "example") String query,
-                                @ParameterObject @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable);
+    NewsTitleDtoList findNews(@RequestParam(required = false)
+                              @Parameter(description = "Search condition",
+                                  example = "example") String query,
+                              @ParameterObject @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable);
 }

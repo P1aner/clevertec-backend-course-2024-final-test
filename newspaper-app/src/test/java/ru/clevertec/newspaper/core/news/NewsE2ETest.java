@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -20,13 +19,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import ru.clevertec.newspaper.PostgresContainerConfiguration;
 import ru.clevertec.newspaper.api.comment.dto.CommentDetailsDto;
+import ru.clevertec.newspaper.api.news.dto.NewNewsDto;
 import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
-import ru.clevertec.newspaper.api.news.dto.NewsTitleDto;
-import ru.clevertec.newspaper.core.secure.SecuredWireMock;
+import ru.clevertec.newspaper.api.news.dto.NewsTitleDtoList;
 import ru.clevertec.newspaper.core.secure.SecureData;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import ru.clevertec.newspaper.core.secure.SecuredWireMock;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -46,18 +43,28 @@ class NewsE2ETest extends PostgresContainerConfiguration {
     @LocalServerPort
     private int port;
 
-    private final RestClient restClient = RestClient.create();
+    private final RestClient restClient = RestClient.builder()
+        .messageConverters(converters -> converters.add(new ProtobufHttpMessageConverter()))
+        .defaultHeader("Accept", "application/x-protobuf")
+        .defaultHeader("Content-Type", "application/x-protobuf")
+        .build();
 
     @Test
     void positiveCasePostNewsRequest() {
         String uri = "http://localhost:%s/api/news".formatted(port);
-        NewsDetailsDto newsDetailsDto1 = new NewsDetailsDto(2L, LocalDateTime.of(2024, 12, 12, 12, 12), "user", "Title", "Text", null);
+        NewsDetailsDto newsDetailsDto1 = NewsDetailsDto.newBuilder()
+            .setId(2L)
+            .setTimestamp("2024-12-12T12:12:00")
+            .setUsername("user")
+            .setTitle("Title")
+            .setText("Text")
+            .build();
+        NewNewsDto newNewsDto = NewsData.newNewsDto();
 
         ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .post()
             .uri(uri)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(NewsData.NEW_NEWS_CONTENT)
+            .body(newNewsDto)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
@@ -92,12 +99,12 @@ class NewsE2ETest extends PostgresContainerConfiguration {
     void patchNewsRequest() {
         String uri = "http://localhost:%s/api/news/1".formatted(port);
         NewsDetailsDto newsDetailsDto1 = NewsData.newsDetailsDto();
+        NewNewsDto newNewsDto = NewsData.newNewsDto();
 
         ResponseEntity<NewsDetailsDto> response = getEntity(restClient
             .patch()
             .uri(uri)
-            .body(NewsData.NEW_NEWS_CONTENT)
-            .contentType(MediaType.APPLICATION_JSON)
+            .body(newNewsDto)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve());
         NewsDetailsDto newsDetailsDto = response.getBody();
@@ -120,8 +127,7 @@ class NewsE2ETest extends PostgresContainerConfiguration {
         restClient
             .patch()
             .uri(uri)
-            .body(NewsData.NEW_NEWS_CONTENT)
-            .contentType(MediaType.APPLICATION_JSON)
+            .body(NewsData.newNewsDto())
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
             .toEntity(CommentDetailsDto.class);
@@ -173,19 +179,18 @@ class NewsE2ETest extends PostgresContainerConfiguration {
     void findCommentByNews() {
         String uri = "http://localhost:%s/api/news".formatted(port);
 
-        ResponseEntity<List<NewsTitleDto>> entity = restClient
+        ResponseEntity<NewsTitleDtoList> entity = restClient
             .get()
             .uri(uri)
             .header(SecureData.AUTHORIZATION, SecureData.BASIC)
             .retrieve()
-            .toEntity(new ParameterizedTypeReference<>() {
-            });
-        List<NewsTitleDto> body = entity.getBody();
+            .toEntity(NewsTitleDtoList.class);
+        NewsTitleDtoList body = entity.getBody();
 
         Assertions.assertEquals(HttpStatus.OK, entity.getStatusCode());
         assert body != null;
-        Assertions.assertEquals(1, body.size());
-        Assertions.assertEquals("Title", body.getFirst().title());
-        Assertions.assertEquals(1L, body.getFirst().id());
+        Assertions.assertEquals(1, body.getNewsListList().size());
+        Assertions.assertEquals("Title", body.getNewsListList().getFirst().getTitle());
+        Assertions.assertEquals(1L, body.getNewsListList().getFirst().getId());
     }
 }

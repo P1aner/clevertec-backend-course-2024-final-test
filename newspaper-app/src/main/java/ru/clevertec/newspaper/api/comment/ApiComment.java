@@ -29,7 +29,7 @@ import ru.clevertec.newspaper.api.news.dto.NewsDetailsDto;
 @Tag(name = "comment", description = "Comment operation")
 public interface ApiComment {
 
-    @PostMapping
+    @PostMapping(consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create comment", description = "This POST method takes a json as input and creates an object in the database")
     @ApiResponse(responseCode = "201", description = "Successful operation. Object created.")
@@ -39,7 +39,7 @@ public interface ApiComment {
                                         required = true) Long newsId,
                                     @RequestBody NewCommentDto newCommentDto);
 
-    @GetMapping("{commentId}")
+    @GetMapping(value = "{commentId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get comment", description = "This GET method show a news comment")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
@@ -52,7 +52,7 @@ public interface ApiComment {
                                      example = "1",
                                      required = true) Long commentId);
 
-    @PatchMapping("{commentId}")
+    @PatchMapping(value = "{commentId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update comment", description = "This PATCH method update a news comment")
     @ApiResponse(responseCode = "200", description = "Successful operation.")
@@ -66,7 +66,7 @@ public interface ApiComment {
                                         required = true) Long commentId,
                                     @RequestBody UpdateCommentDto updateCommentDto);
 
-    @DeleteMapping("{commentId}")
+    @DeleteMapping(value = "{commentId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete comment", description = "This DELETE method deleted a news comment")
     @ApiResponse(responseCode = "204", description = "Successful operation.")
@@ -76,7 +76,7 @@ public interface ApiComment {
                            required = true) Long newsId,
                        @PathVariable Long commentId);
 
-    @GetMapping
+    @GetMapping(consumes = "application/x-protobuf", produces = "application/x-protobuf")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find news comment", description = "This GET method find all news comments or show comments containing query text")
     @ApiResponse(responseCode = "200", description = "Successful operation.")

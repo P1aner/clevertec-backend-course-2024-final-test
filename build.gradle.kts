@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
+    id("com.google.protobuf") version "0.9.4"
 }
 
 extra["springCloudVersion"] = "2023.0.3"
@@ -13,6 +14,7 @@ extra["zalandoWebStarterAndViolations"] = "0.29.1"
 extra["zalandoJacksonDataTypeAndProblem"] = "0.27.1"
 extra["wiremockJetty12"] = "3.9.2"
 extra["springSecurityTest"] = "6.3.4"
+extra["protobufVersion"] = "4.28.2"
 
 allprojects {
     repositories {
@@ -24,6 +26,7 @@ allprojects {
 subprojects {
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
+    apply(plugin = "com.google.protobuf")
     apply(plugin = "java")
 
     dependencies {

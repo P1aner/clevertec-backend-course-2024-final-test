@@ -12,45 +12,6 @@ import java.util.List;
 
 public class CommentData {
 
-    public static final String NEW_COMMENT = """
-            {
-        "localDateTime":"2024-12-12T12:12:00",
-        "text":"Text",
-        "username":"username"
-        }""";
-
-    public static final String NEW_COMMENT_WITH_ID = """
-        {
-        "id": 1,
-        "localDateTime":"2024-12-12T12:12:00",
-        "text":"Text",
-        "username":"username"
-        }
-        """;
-    public static final String UPDATE_COMMENT = """
-        {
-        "localDateTime":"2024-12-12T12:12:00",
-        "text":"Text",
-        "username":"username"
-        }
-        """;
-    public static final String COMMENTS_LIST = """
-        {
-          "id": 1,
-          "localDateTime": "2024-12-12T12:12:00",
-          "title": "Title",
-          "text": "Text",
-          "commentList": [
-            {
-              "id": 1,
-              "localDateTime": "2024-12-12T12:12:00",
-              "text": "Text",
-              "username": "username"
-            }
-          ]
-        }
-        """;
-
     public static Comment fullComment() {
         return Comment.builder()
             .id(1L)
@@ -79,7 +40,11 @@ public class CommentData {
     }
 
     public static NewCommentDto newCommentDto() {
-        return new NewCommentDto(LocalDateTime.of(2024, 12, 12, 12, 12), "Text of fullComment", "username");
+        return NewCommentDto.newBuilder()
+            .setTimestamp("2024-12-12T12:12:00")
+            .setText("Text")
+            .setUsername("username")
+            .build();
     }
 
     public static News fullNewsWithoutComments() {
@@ -93,15 +58,31 @@ public class CommentData {
     }
 
     public static CommentDetailsDto commentDetailsDto() {
-        return new CommentDetailsDto(1L, LocalDateTime.of(2024, 12, 12, 12, 12), "Text", "username");
+        return CommentDetailsDto.newBuilder()
+            .setId(1L)
+            .setTimestamp("2024-12-12T12:12:00")
+            .setText("Text")
+            .setUsername("username")
+            .build();
     }
 
     public static UpdateCommentDto updateCommentDto() {
-        return new UpdateCommentDto(LocalDateTime.of(2024, 12, 12, 12, 12), "Text", "username");
+        return UpdateCommentDto.newBuilder()
+            .setTimestamp("2024-12-12T12:12:00")
+            .setText("Text")
+            .setUsername("username")
+            .build();
     }
 
     public static NewsDetailsDto newsDetailsDto() {
-        return new NewsDetailsDto(1L, LocalDateTime.of(2024, 12, 12, 12, 12), "user", "Title", "Text", List.of(commentDetailsDto()));
+        return NewsDetailsDto.newBuilder()
+            .setId(1L)
+            .setTimestamp("2024-12-12T12:12:00")
+            .setUsername("user")
+            .setTitle("Title")
+            .setText("Text")
+            .addAllCommentList(List.of(commentDetailsDto()))
+            .build();
     }
 
 }

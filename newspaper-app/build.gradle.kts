@@ -12,7 +12,26 @@ configurations {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${property("protobufVersion")}"
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir("src/main/proto")
+        }
+        java {
+            srcDir { "src/main/java" }
+        }
+    }
+}
+
 dependencies {
+    implementation("com.google.protobuf:protobuf-java:${property("protobufVersion")}")
+    implementation("com.google.protobuf:protobuf-java-util:${property("protobufVersion")}")
     implementation("org.zalando:problem-spring-web-starter:${property("zalandoWebStarterAndViolations")}")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
@@ -40,4 +59,8 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test:${project.findProperty("springSecurityTest")}")
     testImplementation("org.wiremock:wiremock-jetty12:${project.findProperty("wiremockJetty12")}")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.named<Copy>("processResources") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

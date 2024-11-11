@@ -60,7 +60,7 @@ class CommentServiceTest {
         CommentDetailsDto comment = commentService.createComment(1L, newCommentDto);
 
         Assertions.assertEquals(comment, commentDetailsDto);
-        Assertions.assertEquals(1L, comment.id());
+        Assertions.assertEquals(1L, comment.getId());
         Assertions.assertEquals(1, fullCommentWithoutNewsAndId.getNews().getId());
 
         Mockito.verify(commentRepository, Mockito.times(1)).save(Mockito.any());
